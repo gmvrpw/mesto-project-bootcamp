@@ -1,10 +1,12 @@
 .page__container {
+    box-sizing: border-box;
     max-width: 880px;
-    padding: calc(20px + 16 * var(--norm-xs));
+    width: 100%;
+    padding: 0 calc(20px + 16 * var(--norm-xs));
 }
 
 @media screen and (min-width: 640px) {
     .page__container {
-        padding: calc(36px - 36 * var(--norm-s));
+        padding: 0 calc(36px - 36 * var(--norm-s));
     }
 }

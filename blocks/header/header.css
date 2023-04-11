@@ -1,0 +1,12 @@
+.header {
+    box-sizing: border-box;
+    border-bottom: 1px solid var(--clr-ntrl-dk);
+    padding: calc(28px + 4 * var(--norm-xs)) 0;
+    width: 100%;
+}
+
+@media screen and (min-width: 640px) {
+    .header {
+        padding: calc(32px + 10 * var(--norm-s)) 0;
+    }
+}

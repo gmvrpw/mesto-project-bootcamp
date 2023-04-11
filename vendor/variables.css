@@ -1,4 +1,10 @@
 :root {
+    /* цвета */
+    --clr-ntrl-ltr: #ffffff;
+    --clr-ntrl-lt: #AAAAAA;
+    --clr-ntrl-dk: #545454;
+    --clr-ntrl-dkr: #000000;
+
     /* нормализованные размеры */
     --norm-s: clamp(0px, calc((100vw - 768px) / (880 - 640)), 1px);
     --norm-xs: clamp(0px, calc((100vw - 320px) / (640 - 320)), 1px);
