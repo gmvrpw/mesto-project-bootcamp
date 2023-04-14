@@ -1,0 +1,17 @@
+.profile__text {
+    max-width: 100%;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    gap: calc(14px + 2 * var(--norm-xs));
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@media screen and (min-width: 640px) {
+    .profile__text {
+        align-items: flex-start;
+    }
+}

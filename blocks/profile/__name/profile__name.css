@@ -1,0 +1,11 @@
+.profile__name {
+    margin: 0;
+    padding: 0;
+    max-width: 100%;
+    color: var(--clr-ntrl-ltr);
+    font-size: calc(1px * var(--fs-h-m) + (var(--fs-h-l) - var(--fs-h-m)) * var(--norm-xs));
+    font-weight: 500;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
