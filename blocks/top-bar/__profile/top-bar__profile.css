@@ -1,0 +1,5 @@
+.top-bar__profile {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
