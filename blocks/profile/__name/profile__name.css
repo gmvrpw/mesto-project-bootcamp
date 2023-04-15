@@ -1,12 +1,12 @@
 .profile__name {
-    position: relative;
-    top: calc(6px + 2 * var(--norm-xs));
     margin: 0;
     padding: 0;
     max-width: 100%;
-    color: var(--clr-ntrl-ltr);
+    height: calc(32px + 16 * var(--norm-xs));
+    line-height: calc(32px + 16 * var(--norm-xs));
     font-size: calc(1px * var(--fs-h-m) + (var(--fs-h-l) - var(--fs-h-m)) * var(--norm-xs));
     font-weight: 500;
+    color: var(--clr-ntrl-ltr);
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
