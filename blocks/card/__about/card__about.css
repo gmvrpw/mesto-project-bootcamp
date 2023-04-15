@@ -1,0 +1,7 @@
+.card__about {
+    display: flex;
+    flex-direction: row;
+    border-radius: 0 0 10px 10px;
+    padding: 24px 16px 32px 20px;
+    background-color: var(--clr-ntrl-ltr);
+}
