@@ -1,0 +1,7 @@
+.button_type_icon {
+    transition: opacity linear 100ms;
+}
+
+.button_type_icon:hover {
+    opacity: 0.6;
+}

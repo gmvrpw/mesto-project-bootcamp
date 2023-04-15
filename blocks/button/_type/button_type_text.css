@@ -1,0 +1,7 @@
+.button_type_text {
+
+}
+
+.button_type_text:hover {
+    opacity: 0.8;
+}

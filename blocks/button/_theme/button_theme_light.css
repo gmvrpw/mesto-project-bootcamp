@@ -1,0 +1,4 @@
+.button_theme_light {
+    border-color: var(--clr-ntrl-dkr);
+    background-color: var(--clr-ntrl-ltr);
+}
