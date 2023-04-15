@@ -1,0 +1,9 @@
+.page__footer {
+    margin-bottom: calc(36px + 12 * var(--norm-xs));
+}
+
+@media screen and (min-width: 640px) {
+    .page__footer {
+        margin-bottom: calc(48px + 12 * var(--norm-s));
+    }
+}
