@@ -1,0 +1,7 @@
+.footer__text {
+    margin: 0;
+    padding: 0;
+    line-height: calc(18px + 4 * var(--norm-xs));
+    font-size: calc(1px * var(--fs-m) + (var(--fs-l) - var(--fs-m)) * var(--norm-xs));
+    color: var(--clr-ntrl-dk);
+}
