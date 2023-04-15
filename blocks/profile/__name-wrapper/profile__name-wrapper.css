@@ -1,6 +1,6 @@
 .profile__name-wrapper {
     max-width: 100%;
+    height: calc(24px + 16 * var(--norm-xs));
     display: flex;
-    align-items: flex-end;
     gap: calc(10px + 8 * var(--norm-xs));
 }
