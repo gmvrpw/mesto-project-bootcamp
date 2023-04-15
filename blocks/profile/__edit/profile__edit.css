@@ -1,3 +1,4 @@
 .profile__edit {
-
+    height: calc(18px + 6 * var(--norm-xs));
+    aspect-ratio: 1 / 1;
 }
