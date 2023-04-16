@@ -1,6 +1,6 @@
 
 # Место
-> Лучшие места со всего мира **[здесь](https://gmvrpw.github.io/russian-travel-bootcamp/)**.
+> Лучшие места со всего мира **[здесь](https://gmvrpw.github.io/mesto-project-bootcamp/)**.
 > 
 <img src="./repository-lead-image.jpg" alt='Вырезка из картины "Опять двойка" Фёдора Решетникова'/>
 
