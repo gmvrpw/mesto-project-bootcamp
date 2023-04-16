@@ -1,12 +1,11 @@
 .top-bar__add {
-    padding: 16px 0;
     width: 100%;
     height: 50px;
+    background-size: calc(16px + 6 * var(--norm-xs));
 }
 
 @media screen and (min-width: 800px) {
     .top-bar__add {
-        width: auto;
-        padding: 16px 64px;
+        max-width: 150px;
     }
 }
