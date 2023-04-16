@@ -4,6 +4,8 @@
     --clr-ntrl-lt: #AAAAAA;
     --clr-ntrl-dk: #545454;
     --clr-ntrl-dkr: #000000;
+    --clr-ntrl-dkr-50: rgba(0, 0, 0, 0.5);
+    --clr-ntrl-dkr-20: rgba(0, 0, 0, 0.2);
 
     /* нормализованные размеры */
     --norm-s: clamp(0px, calc((100vw - 768px) / (880 - 640)), 1px);
@@ -13,6 +15,7 @@
     --fs-h-l: 42;
     --fs-h-m: 28;
     --fs-h-s: 24;
+    --fs-h-xs: 18;
 
     /* размеры шрифта текста */
     --fs-l: 18;
