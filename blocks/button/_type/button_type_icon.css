@@ -1,4 +1,5 @@
 .button_type_icon {
+    background-color: transparent;
     transition: opacity linear 100ms;
 }
 
