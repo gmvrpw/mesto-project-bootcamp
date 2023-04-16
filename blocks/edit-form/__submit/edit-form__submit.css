@@ -1,4 +1,5 @@
 .edit-form__submit {
     width: 100%;
     height: calc(46px + 4 * var(--norm-xs));
+    font-size: calc(1px * var(--fs-m) + (var(--fs-l) - var(--fs-m)) * var(--norm-xs));
 }
