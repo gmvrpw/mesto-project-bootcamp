@@ -1,0 +1,14 @@
+.popup__close {
+    position: absolute;
+    top: calc(-36px - 12 * var(--norm-xs));
+    right: 0;
+    height: calc(20px + 12 * var(--norm-xs));
+    aspect-ratio: 1 / 1;
+}
+
+@media screen and (min-width: 640px) {
+    .popup__close {
+        top: calc(-48px + 8 * var(--norm-s));
+        right: calc(-40 * var(--norm-s));
+    }
+}
