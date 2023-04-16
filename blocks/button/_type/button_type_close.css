@@ -1,10 +1,10 @@
-.button_type_icon {
+.button_type_close {
     background-color: transparent;
+    background-image: url("../../../images/close.svg");
     background-position: center;
     background-repeat: no-repeat;
-    transition: opacity linear 100ms;
 }
 
-.button_type_icon:hover {
+.button_type_close:hover {
     opacity: 0.6;
 }
