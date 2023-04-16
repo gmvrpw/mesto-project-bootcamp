@@ -3,10 +3,10 @@
 @import "../vendor/variables.css";
 @import "../blocks/button/button.css";
 @import "../blocks/button/_bordered/button_bordered.css";
-@import "../blocks/button/_type/button_type_icon.css";
-@import "../blocks/button/_type/button_type_text.css";
 @import "../blocks/button/_theme/button_theme_light.css";
 @import "../blocks/button/_theme/button_theme_dark.css";
+@import "../blocks/button/_type/button_type_icon.css";
+@import "../blocks/button/_type/button_type_text.css";
 @import "../blocks/text-input/text-input.css";
 @import "../blocks/page/page.css";
 @import "../blocks/page/__container/page__container.css";
