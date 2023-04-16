@@ -2,3 +2,7 @@
     height: 24px;
     aspect-ratio: 1 / 1;
 }
+
+.card__like:hover {
+    opacity: 0.5;
+}
