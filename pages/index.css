@@ -7,6 +7,11 @@
 @import "../blocks/button/_theme/button_theme_dark.css";
 @import "../blocks/button/_type/button_type_icon.css";
 @import "../blocks/button/_type/button_type_text.css";
+@import "../blocks/button/_icon-type/button_icon-type_add.css";
+@import "../blocks/button/_icon-type/button_icon-type_close.css";
+@import "../blocks/button/_icon-type/button_icon-type_edit.css";
+@import "../blocks/button/_icon-type/button_icon-type_like.css";
+@import "../blocks/button/_icon-type/button_icon-type_like-active.css";
 @import "../blocks/text-input/text-input.css";
 @import "../blocks/page/page.css";
 @import "../blocks/page/__container/page__container.css";
