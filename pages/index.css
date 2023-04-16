@@ -40,6 +40,7 @@
 @import "../blocks/footer/footer.css";
 @import "../blocks/footer/__text/footer__text.css";
 @import "../blocks/popup/popup.css";
+@import "../blocks/popup/_hidden/popup_hidden.css";
 @import "../blocks/popup/__content/popup__content.css";
 @import "../blocks/popup/__close/popup__close.css";
 @import "../blocks/edit-form/edit-form.css";
