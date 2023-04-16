@@ -1,0 +1,16 @@
+.text-input {
+    margin: 0;
+    border-top: none;
+    border-right: none;
+    border-bottom: 1px solid var(--clr-ntrl-dkr-20);
+    border-left: none;
+    padding: 0;
+    width: 100%;
+    line-height: 36px;
+    font-size: var(--fs-m);
+    outline: none;
+}
+
+:focus-visible {
+    border-color: darkblue;
+}

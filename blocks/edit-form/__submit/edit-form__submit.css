@@ -1,0 +1,4 @@
+.edit-form__submit {
+    width: 100%;
+    height: calc(46px + 4 * var(--norm-xs));
+}

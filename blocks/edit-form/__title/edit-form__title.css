@@ -1,0 +1,7 @@
+.edit-form__title {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    line-height: calc(22px + 10 * var(--norm-xs));
+    font-size: calc(1px * var(--fs-h-xs) + (var(--fs-h-s) - var(--fs-h-xs)) * var(--norm-xs));
+}
