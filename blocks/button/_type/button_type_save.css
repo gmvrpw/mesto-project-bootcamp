@@ -1,5 +1,8 @@
-.button_theme_dark {
-    border-color: var(--clr-ntrl-ltr);
+.button_type_save {
     background-color: var(--clr-ntrl-dkr);
     color: var(--clr-ntrl-ltr);
+}
+
+.button_type_save:hover {
+    opacity: 0.8;
 }

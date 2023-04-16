@@ -1,0 +1,11 @@
+.button_type_add {
+    border: 2px solid var(--clr-ntrl-ltr);
+    background-color: transparent;
+    background-image: url("../../../images/add.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.button_type_add:hover {
+    opacity: 0.6;
+}
