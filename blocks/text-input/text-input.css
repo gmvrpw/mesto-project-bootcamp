@@ -4,10 +4,9 @@
     border-right: none;
     border-bottom: 1px solid var(--clr-ntrl-dkr-20);
     border-left: none;
-    padding: 0;
+    padding: 0 0 12px 0;
     width: 100%;
-    line-height: 36px;
-    font-size: var(--fs-m);
+    font-size: calc(1px * var(--fs-m));
     outline: none;
 }
 

@@ -1,5 +1,6 @@
 .popup__content {
     position: relative;
+    box-sizing: border-box;
     margin: 18px;
     max-width: 430px;
     width: 100%;

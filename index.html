@@ -8,90 +8,78 @@
 </head>
 <body>
   <div class="page">
-<!--    <div class="popup">-->
-<!--      <div class="popup__content">-->
-<!--        <button class="popup__close button button_type_icon button_icon-type_close button_theme_dark"></button>-->
-<!--        <form class="edit-form">-->
-<!--          <h3 class="edit-form__title">Редактировать профиль</h3>-->
-<!--          <div class="edit-form__inputs">-->
-<!--            <input type="text" class="edit-form__text-input text-input" value="Жак-Ив Кусто">-->
-<!--            <input type="text" class="edit-form__text-input text-input" value="Исследователь океана">-->
-<!--          </div>-->
-<!--          <button type="submit" class="edit-form__submit button button_type_text button_theme_dark">Сохранить</button>-->
-<!--        </form>-->
-<!--      </div>-->
-<!--    </div>-->
+    <div class="popup popup_hidden">
+      <div class="popup__content">
+        <button type="button" class="popup__close button button_type_icon button_icon-type_close button_theme_dark"></button>
+        <form class="edit-form">
+          <h3 class="edit-form__title">Редактировать профиль</h3>
+          <div class="edit-form__inputs">
+            <input type="text" class="edit-form__text-input text-input" value="Жак-Ив Кусто">
+            <input type="text" class="edit-form__text-input text-input" value="Исследователь океана">
+          </div>
+          <button type="submit" class="edit-form__submit button button_type_text button_theme_dark">Сохранить</button>
+        </form>
+      </div>
+    </div>
     <div class="page__container">
       <header class="page__header header">
         <img src="./images/logo.svg" class="header__image" alt='Логотип "Место"'>
       </header>
       <main class="page__main">
         <section class="top-bar" aria-label="Заголовок профиля">
-          <article class="top-bar__profile profile" aria-label="Профиль пользователя Жак-Ив Кусто">
+          <div class="top-bar__profile profile" aria-label="Профиль пользователя Жак-Ив Кусто">
             <img src="./images/avatar.png" class="profile__avatar" alt="Аватар пользователя Жак-Ив Кусто">
             <div class="profile__text">
               <div class="profile__name-wrapper">
                 <h1 class="profile__name"> Жак-Ив КустоЖак-Ив КустоЖак-Ив КустоЖак-Ив КустоЖак-Ив КустоЖак-Ив Кусто </h1>
-                <button class="profile__edit button button_type_icon button_icon-type_edit button_theme_dark "></button>
+                <button type="button" class="profile__edit button button_type_icon button_icon-type_edit button_theme_dark "></button>
               </div>
               <p class="profile__description">Исследователь океана</p>
             </div>
-          </article>
-          <button class="top-bar__add button button_type_icon button_icon-type_add button_theme_dark button_bordered"></button>
+          </div>
+          <button type="button" class="top-bar__add button button_type_icon button_icon-type_add button_theme_dark button_bordered"></button>
         </section>
         <section class="cards" aria-label="Карточки пользователя Жак-Ив Кусто">
           <article class="card">
             <img class="card__image" src="images/karachaevsk.jpg" alt="Карачаевск">
             <div class="card__about">
               <h2 class="card__name">Карачаевск</h2>
-              <div class="card__actions">
-                <button class="card__like button button_type_icon button_icon-type_like button_theme_light"></button>
-              </div>
+              <button type="button" class="card__like button button_type_icon button_icon-type_like button_theme_light"></button>
             </div>
           </article>
           <article class="card">
             <img class="card__image" src="images/elbrus.jpg" alt="Эльбрус">
             <div class="card__about">
               <h2 class="card__name">Эльбрус</h2>
-              <div class="card__actions">
-                <button class="card__like button button_type_icon button_icon-type_like button_theme_light"></button>
-              </div>
+              <button type="button" class="card__like button button_type_icon button_icon-type_like button_theme_light"></button>
             </div>
           </article>
           <article class="card">
             <img class="card__image" src="images/dombay.jpg" alt="Домбай">
             <div class="card__about">
               <h2 class="card__name">Домбай</h2>
-              <div class="card__actions">
-                <button class="card__like button button_type_icon button_icon-type_like button_theme_light"></button>
-              </div>
+              <button type="button" class="card__like button button_type_icon button_icon-type_like button_theme_light"></button>
             </div>
           </article>
           <article class="card">
             <img class="card__image" src="images/elbrus.jpg" alt="Эльбрус">
             <div class="card__about">
               <h2 class="card__name">Эльбрус</h2>
-              <div class="card__actions">
-                <button class="card__like button button_type_icon button_icon-type_like button_theme_light"></button>
-              </div>
+              <button type="button" class="card__like button button_type_icon button_icon-type_like button_theme_light"></button>
             </div>
           </article>
           <article class="card">
             <img class="card__image" src="images/dombay.jpg" alt="Домбай">
             <div class="card__about">
               <h2 class="card__name">Домбай</h2>
-              <div class="card__actions">
-                <button class="card__like button button_type_icon button_icon-type_like button_theme_light"></button>
-              </div>
+              <button type="button" class="card__like button button_type_icon button_icon-type_like button_theme_light"></button>
             </div>
           </article>
           <article class="card">
             <img class="card__image" src="images/karachaevo-cherkesiya.jpg" alt="Карачаево-Черкесия">
             <div class="card__about">
               <h2 class="card__name">Карачаево-Черкесия</h2>
-              <div class="card__actions">
-                <button class="card__like button button_type_icon button_icon-type_like button_theme_light"></button>
-              </div>
+              <button type="button" class="card__like button button_type_icon button_icon-type_like button_theme_light"></button>
             </div>
           </article>
         </section>
