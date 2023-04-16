@@ -1,12 +1,19 @@
 .header {
     box-sizing: border-box;
+    margin: 0 calc(-20px - 16 * var(--norm-xs));
     border-bottom: 1px solid var(--clr-ntrl-dk);
-    padding: calc(28px + 4 * var(--norm-xs)) 0;
-    width: 100%;
+    padding: calc(28px + 6 * var(--norm-xs))
+            calc(28px + 4 * var(--norm-xs))
+            calc(28px + 4 * var(--norm-xs))
+            calc(28px + 4 * var(--norm-xs));
 }
 
 @media screen and (min-width: 640px) {
     .header {
-        padding: calc(32px + 10 * var(--norm-s)) 0;
+        margin: 0 calc(-36px + 36 * var(--norm-s));
+        padding: calc(34px + 10 * var(--norm-s))
+                calc(32px - 32 * var(--norm-s))
+                calc(32px + 10 * var(--norm-s))
+                calc(32px - 32 * var(--norm-s));
     }
 }
