@@ -1,4 +1,5 @@
 .button_theme_dark {
     border-color: var(--clr-ntrl-ltr);
     background-color: var(--clr-ntrl-dkr);
+    color: var(--clr-ntrl-ltr);
 }
