@@ -1,0 +1,7 @@
+.card__delete {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    height: 20px;
+    aspect-ratio: 1 / 1;
+}

@@ -7,6 +7,7 @@
 @import "../blocks/button/_type/button_type_add.css";
 @import "../blocks/button/_type/button_type_save.css";
 @import "../blocks/button/_type/button_type_close.css";
+@import "../blocks/button/_type/button_type_delete.css";
 @import "../blocks/text-input/text-input.css";
 @import "../blocks/page/page.css";
 @import "../blocks/page/__container/page__container.css";
@@ -32,6 +33,7 @@
 @import "../blocks/card/__name/card__name.css";
 @import "../blocks/card/__like/card__like.css";
 @import "../blocks/card/__like/_liked/card__like_liked.css";
+@import "../blocks/card/__delete/card__delete.css";
 @import "../blocks/footer/footer.css";
 @import "../blocks/footer/__text/footer__text.css";
 @import "../blocks/popup/popup.css";
