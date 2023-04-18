@@ -54,6 +54,7 @@
         <h2 class="card__name">Домбай</h2>
         <button type="button" class="card__like button button_type_like" aria-label="Нравится"></button>
       </div>
+      <button type="button" class="card__delete button button_type_delete" aria-label="Удалить"></button>
     </article>
   </template>
   <!-- Popup -->
@@ -122,6 +123,11 @@
       const cardLikeButton = cardElement.querySelector(".card__like")
       cardLikeButton.addEventListener("click", () => {
         cardLikeButton.classList.toggle("card__like_liked");
+      })
+
+      const cardDeleteButton = cardElement.querySelector(".card__delete")
+      cardDeleteButton.addEventListener("click", () => {
+        cardElement.remove();
       })
 
       container.appendChild(cardElement);

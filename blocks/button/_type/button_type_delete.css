@@ -1,0 +1,10 @@
+.button_type_delete {
+    background-color: transparent;
+    background-image: url("../../../images/delete.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.button_type_delete:hover {
+    opacity: 0.6;
+}
