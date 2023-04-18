@@ -1,4 +1,8 @@
 .edit-form {
+    box-sizing: border-box;
     margin: 0;
-    padding: 0;
+    border-radius: 10px;
+    padding: calc(24px + 12 * var(--norm-xs));
+    width: min(430px, calc(100vw - 36px));
+    background-color: var(--clr-ntrl-ltr);
 }

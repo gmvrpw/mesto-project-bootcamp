@@ -1,10 +1,4 @@
 .popup__content {
     position: relative;
-    box-sizing: border-box;
     margin: 18px;
-    max-width: 430px;
-    width: 100%;
-    border-radius: 10px;
-    padding: calc(24px + 12 * var(--norm-xs));
-    background-color: var(--clr-ntrl-ltr);
 }

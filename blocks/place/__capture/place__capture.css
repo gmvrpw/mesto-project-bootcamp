@@ -1,0 +1,5 @@
+.place__capture {
+    line-height: 16px;
+    font-size: calc(1px * var(--fs-s));
+    color: var(--clr-ntrl-ltr);
+}
