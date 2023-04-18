@@ -14,8 +14,8 @@
         <form class="edit-form">
           <h3 class="edit-form__title">Редактировать профиль</h3>
           <div class="edit-form__inputs">
-            <input type="text" class="edit-form__text-input text-input" value="Жак-Ив Кусто">
-            <input type="text" class="edit-form__text-input text-input" value="Исследователь океана">
+            <input type="text" name="name" class="edit-form__text-input text-input" value="Жак-Ив Кусто">
+            <input type="text" name="description" class="edit-form__text-input text-input" value="Исследователь океана">
           </div>
           <button type="submit" class="edit-form__submit button button_type_save">Сохранить</button>
         </form>
@@ -31,7 +31,7 @@
             <img src="./images/avatar.png" class="profile__avatar" alt="Аватар пользователя Жак-Ив Кусто">
             <div class="profile__text">
               <div class="profile__name-wrapper">
-                <h1 class="profile__name"> Жак-Ив Кусто </h1>
+                <h1 class="profile__name">Жак-Ив Кусто</h1>
                 <button type="button" class="profile__edit button button_type_edit"></button>
               </div>
               <p class="profile__description">Исследователь океана</p>
@@ -89,20 +89,67 @@
       </footer>
     </div>
   </div>
+  <template id="card-template">
+    <article class="card">
+      <img class="card__image" src="images/dombay.jpg" alt="Домбай">
+      <div class="card__about">
+        <h2 class="card__name">Домбай</h2>
+        <button type="button" class="card__like button button_type_like" aria-label="Нравится"></button>
+      </div>
+    </article>
+  </template>
+  <!-- Popup -->
   <script lang="javascript">
+    const openPopup = (popup) => {
+      popup.classList.remove("popup_hidden")
+    }
+    const closePopup = (popup) => {
+      popup.classList.add("popup_hidden")
+    }
+
     // Добавляет функционал закрытия всем модальным окнам
     document.querySelectorAll(".popup").forEach((popup) => {
       popup.querySelectorAll(".popup__close").forEach((closeButton) => {
         closeButton.addEventListener("click", () => {
-          popup.classList.add("popup_hidden")
+          closePopup(popup)
         })
       })
     })
-
+  </script>
+  <!-- Изменение профиля -->
+  <script>
     // Добавляет функционал открытия модального окна редактирования профиля
-    const editProfilePopup = document.querySelector(".popup")
-    document.querySelector(".profile__edit").addEventListener("click", () => {
-      editProfilePopup.classList.remove("popup_hidden")
+    const profileName = document.querySelector(".profile__name");
+    const profileDescription = document.querySelector(".profile__description");
+    const profileEdit = document.querySelector(".profile__edit");
+
+    const editProfilePopup = document.querySelector(".popup");
+    const editProfileForm = editProfilePopup.querySelector("form");
+    const editProfileNameInput = editProfileForm.elements.name;
+    const editProfileDescriptionInput = editProfileForm.elements.description;
+
+    const cards = document.querySelector(".cards")
+
+    const updateProfileEditForm = (name, description) => {
+      editProfileNameInput.value = name
+      editProfileDescriptionInput.value = description
+    }
+
+    const updateProfile = (name, description) => {
+      profileName.textContent = name;
+      profileDescription.textContent = description;
+      cards.setAttribute("aria-label", `Карточки пользователя ${name}`)
+    }
+
+    profileEdit.addEventListener("click", () => {
+      updateProfileEditForm(profileName.textContent, profileDescription.textContent)
+      openPopup(editProfilePopup)
+    })
+
+    editProfileForm.addEventListener("submit", (e) => {
+      updateProfile(editProfileNameInput.value, editProfileDescriptionInput.value);
+      closePopup(editProfilePopup);
+      e.preventDefault();
     })
   </script>
 </body>
