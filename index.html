@@ -119,6 +119,11 @@
       cardElement.querySelector(".card__image").alt = card.name;
       cardElement.querySelector(".card__name").textContent = card.name;
 
+      const cardLikeButton = cardElement.querySelector(".card__like")
+      cardLikeButton.addEventListener("click", () => {
+        cardLikeButton.classList.toggle("card__like_liked");
+      })
+
       container.appendChild(cardElement);
     }
 

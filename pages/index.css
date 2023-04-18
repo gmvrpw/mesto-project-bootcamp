@@ -31,6 +31,7 @@
 @import "../blocks/card/__about/card__about.css";
 @import "../blocks/card/__name/card__name.css";
 @import "../blocks/card/__like/card__like.css";
+@import "../blocks/card/__like/_liked/card__like_liked.css";
 @import "../blocks/footer/footer.css";
 @import "../blocks/footer/__text/footer__text.css";
 @import "../blocks/popup/popup.css";
