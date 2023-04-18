@@ -45,3 +45,6 @@
 @import "../blocks/edit-form/__inputs/edit-form__inputs.css";
 @import "../blocks/edit-form/__text-input/edit-form__text-input.css";
 @import "../blocks/edit-form/__submit/edit-form__submit.css";
+@import "../blocks/place/place.css";
+@import "../blocks/place/__image/place__image.css";
+@import "../blocks/place/__capture/place__capture.css";

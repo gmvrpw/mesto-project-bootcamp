@@ -34,6 +34,15 @@
         </form>
       </div>
     </div>
+    <div id="card-popup" class="popup popup_hidden">
+      <div class="popup__content popup__content_type_image">
+        <button type="button" class="popup__close button button_type_close" aria-label="Закрыть"></button>
+        <figure class="place">
+          <img src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg" class="place__image">
+          <figcaption class="place__capture">Карачаево-Черкессия</figcaption>
+        </figure>
+      </div>
+    </div>
     <div class="page__container">
       <header class="page__header header">
         <img src="./images/logo.svg" class="header__image" alt='Логотип "Место"'>
@@ -126,11 +135,16 @@
   </script>
   <!-- Рендер карточек -->
   <script lang="javascript">
+    const cardPopup = document.querySelector("#card-popup");
+    const cardPopupImage = cardPopup.querySelector(".place__image");
+    const cardPopupCapture = cardPopup.querySelector(".place__capture");
+
     const renderCard = (card, container) => {
       const cardTemplate = document.querySelector("#card-template");
       const cardElement = cardTemplate.content.querySelector(".card").cloneNode(true);
-      cardElement.querySelector(".card__image").src = card.link;
-      cardElement.querySelector(".card__image").alt = card.name;
+      const cardImage = cardElement.querySelector(".card__image");
+      cardImage.src = card.link;
+      cardImage.alt = card.name;
       cardElement.querySelector(".card__name").textContent = card.name;
 
       const cardLikeButton = cardElement.querySelector(".card__like")
@@ -141,6 +155,12 @@
       const cardDeleteButton = cardElement.querySelector(".card__delete")
       cardDeleteButton.addEventListener("click", () => {
         cardElement.remove();
+      })
+
+      cardImage.addEventListener("click", (e) => {
+        cardPopupImage.src = card.link
+        cardPopupCapture.textContent = card.name
+        openPopup(cardPopup);
       })
 
       container.appendChild(cardElement);
