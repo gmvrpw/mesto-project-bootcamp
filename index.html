@@ -8,7 +8,7 @@
 </head>
 <body>
   <div class="page">
-    <div class="popup popup_hidden">
+    <div id="profile-edit-popup" class="popup popup_hidden">
       <div class="popup__content">
         <button type="button" class="popup__close button button_type_close" aria-label="Закрыть"></button>
         <form class="edit-form">
@@ -16,6 +16,19 @@
           <div class="edit-form__inputs">
             <input type="text" name="name" class="edit-form__text-input text-input" value="Жак-Ив Кусто">
             <input type="text" name="description" class="edit-form__text-input text-input" value="Исследователь океана">
+          </div>
+          <button type="submit" class="edit-form__submit button button_type_save">Сохранить</button>
+        </form>
+      </div>
+    </div>
+    <div id="add-card-popup" class="popup popup_hidden">
+      <div class="popup__content">
+        <button type="button" class="popup__close button button_type_close" aria-label="Закрыть"></button>
+        <form class="edit-form">
+          <h3 class="edit-form__title">Новое место</h3>
+          <div class="edit-form__inputs">
+            <input type="text" name="name" class="edit-form__text-input text-input" placeholder="Название">
+            <input type="text" name="link" class="edit-form__text-input text-input" placeholder="Ссылка на картинку">
           </div>
           <button type="submit" class="edit-form__submit button button_type_save">Сохранить</button>
         </form>
@@ -82,7 +95,7 @@
     const profileDescription = document.querySelector(".profile__description");
     const profileEdit = document.querySelector(".profile__edit");
 
-    const editProfilePopup = document.querySelector(".popup");
+    const editProfilePopup = document.querySelector("#profile-edit-popup");
     const editProfileForm = editProfilePopup.querySelector("form");
     const editProfileNameInput = editProfileForm.elements.name;
     const editProfileDescriptionInput = editProfileForm.elements.description;
@@ -164,6 +177,31 @@
     const cardsSection = document.querySelector(".cards");
     initialCards.forEach((card) => {
       renderCard(card, cardsSection)
+    })
+  </script>
+  <!-- Добавление карточек -->
+  <script>
+    // Добавляет функциональность открытия модального окна создания карточки
+    const addCardButton = document.querySelector(".top-bar__add");
+
+    const addCardPopup = document.querySelector("#add-card-popup");
+    const addCardForm = addCardPopup.querySelector("form");
+    const addCardNameInput = addCardForm.elements.name;
+    const addCardLinkInput = addCardForm.elements.link;
+
+    addCardButton.addEventListener("click", () => {
+      addCardNameInput.value = ""
+      addCardLinkInput.value = ""
+      openPopup(addCardPopup)
+    })
+
+    addCardForm.addEventListener("submit", (e) => {
+      renderCard({
+        name: addCardNameInput.value,
+        link: addCardLinkInput.value
+      }, cards)
+      closePopup(addCardPopup)
+      e.preventDefault()
     })
   </script>
 </body>
