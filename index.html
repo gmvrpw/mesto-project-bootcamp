@@ -89,5 +89,21 @@
       </footer>
     </div>
   </div>
+  <script lang="javascript">
+    // Добавляет функционал закрытия всем модальным окнам
+    document.querySelectorAll(".popup").forEach((popup) => {
+      popup.querySelectorAll(".popup__close").forEach((closeButton) => {
+        closeButton.addEventListener("click", () => {
+          popup.classList.add("popup_hidden")
+        })
+      })
+    })
+
+    // Добавляет функционал открытия модального окна редактирования профиля
+    const editProfilePopup = document.querySelector(".popup")
+    document.querySelector(".profile__edit").addEventListener("click", () => {
+      editProfilePopup.classList.remove("popup_hidden")
+    })
+  </script>
 </body>
 </html>
