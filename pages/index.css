@@ -1,5 +1,5 @@
-@import "../fonts/Inter/inter.css";
 @import "../vendor/normalize.css";
+@import "../fonts/Inter/inter.css";
 @import "../vendor/variables.css";
 @import "../blocks/button/button.css";
 @import "../blocks/button/_type/button_type_like.css";
