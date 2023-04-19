@@ -41,8 +41,8 @@
         <form class="edit-form">
           <h3 class="edit-form__title">Редактировать профиль</h3>
           <div class="edit-form__inputs">
-            <input type="text" name="name" class="edit-form__text-input text-input" value="Жак-Ив Кусто">
-            <input type="text" name="description" class="edit-form__text-input text-input" value="Исследователь океана">
+            <input type="text" name="name" class="edit-form__text-input text-input" placeholder="Имя пользователя" aria-label="Имя пользователя">
+            <input type="text" name="description" class="edit-form__text-input text-input" placeholder="Описание" aria-label="Описание">
           </div>
           <button type="submit" class="edit-form__submit button button_type_save">Сохранить</button>
         </form>
@@ -56,8 +56,8 @@
         <form class="edit-form">
           <h3 class="edit-form__title">Новое место</h3>
           <div class="edit-form__inputs">
-            <input type="text" name="name" class="edit-form__text-input text-input" placeholder="Название">
-            <input type="text" name="link" class="edit-form__text-input text-input" placeholder="Ссылка на картинку">
+            <input type="text" name="name" class="edit-form__text-input text-input" placeholder="Название" aria-label="Название">
+            <input type="text" name="link" class="edit-form__text-input text-input" placeholder="Ссылка на картинку" aria-label="Ссылка на картинку">
           </div>
           <button type="submit" class="edit-form__submit button button_type_save">Сохранить</button>
         </form>
@@ -65,7 +65,7 @@
     </div>
   </template>
   <template id="place-popup">
-    <div class="popup">
+    <div class="popup">места
       <div class="popup__content popup__content_type_image">
         <button type="button" class="popup__close button button_type_close" aria-label="Закрыть"></button>
         <figure class="place">
