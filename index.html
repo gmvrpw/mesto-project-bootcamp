@@ -8,41 +8,6 @@
 </head>
 <body>
   <div class="page">
-    <div id="profile-edit-popup" class="popup popup_hidden">
-      <div class="popup__content">
-        <button type="button" class="popup__close button button_type_close" aria-label="Закрыть"></button>
-        <form class="edit-form">
-          <h3 class="edit-form__title">Редактировать профиль</h3>
-          <div class="edit-form__inputs">
-            <input type="text" name="name" class="edit-form__text-input text-input" value="Жак-Ив Кусто">
-            <input type="text" name="description" class="edit-form__text-input text-input" value="Исследователь океана">
-          </div>
-          <button type="submit" class="edit-form__submit button button_type_save">Сохранить</button>
-        </form>
-      </div>
-    </div>
-    <div id="add-card-popup" class="popup popup_hidden">
-      <div class="popup__content">
-        <button type="button" class="popup__close button button_type_close" aria-label="Закрыть"></button>
-        <form class="edit-form">
-          <h3 class="edit-form__title">Новое место</h3>
-          <div class="edit-form__inputs">
-            <input type="text" name="name" class="edit-form__text-input text-input" placeholder="Название">
-            <input type="text" name="link" class="edit-form__text-input text-input" placeholder="Ссылка на картинку">
-          </div>
-          <button type="submit" class="edit-form__submit button button_type_save">Сохранить</button>
-        </form>
-      </div>
-    </div>
-    <div id="card-popup" class="popup popup_hidden">
-      <div class="popup__content popup__content_type_image">
-        <button type="button" class="popup__close button button_type_close" aria-label="Закрыть"></button>
-        <figure class="place">
-          <img src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg" class="place__image">
-          <figcaption class="place__capture">Карачаево-Черкессия</figcaption>
-        </figure>
-      </div>
-    </div>
     <div class="page__container">
       <header class="page__header header">
         <img src="./images/logo.svg" class="header__image" alt='Логотип "Место"'>
@@ -61,7 +26,7 @@
           </div>
           <button type="button" class="top-bar__add button button_type_add" aria-label="Изменить профиль"></button>
         </section>
-        <section class="cards" aria-label="Карточки пользователя Жак-Ив Кусто">
+        <section class="cards" aria-label="Карточки пользователя">
         </section>
       </main>
       <footer class="page__footer footer">
@@ -69,6 +34,47 @@
       </footer>
     </div>
   </div>
+  <template id="edit-profile-popup">
+    <div class="popup">
+      <div class="popup__content">
+        <button type="button" class="popup__close button button_type_close" aria-label="Закрыть"></button>
+        <form class="edit-form">
+          <h3 class="edit-form__title">Редактировать профиль</h3>
+          <div class="edit-form__inputs">
+            <input type="text" name="name" class="edit-form__text-input text-input" value="Жак-Ив Кусто">
+            <input type="text" name="description" class="edit-form__text-input text-input" value="Исследователь океана">
+          </div>
+          <button type="submit" class="edit-form__submit button button_type_save">Сохранить</button>
+        </form>
+      </div>
+    </div>
+  </template>
+  <template id="add-card-popup">
+    <div class="popup">
+      <div class="popup__content">
+        <button type="button" class="popup__close button button_type_close" aria-label="Закрыть"></button>
+        <form class="edit-form">
+          <h3 class="edit-form__title">Новое место</h3>
+          <div class="edit-form__inputs">
+            <input type="text" name="name" class="edit-form__text-input text-input" placeholder="Название">
+            <input type="text" name="link" class="edit-form__text-input text-input" placeholder="Ссылка на картинку">
+          </div>
+          <button type="submit" class="edit-form__submit button button_type_save">Сохранить</button>
+        </form>
+      </div>
+    </div>
+  </template>
+  <template id="place-popup">
+    <div class="popup">
+      <div class="popup__content popup__content_type_image">
+        <button type="button" class="popup__close button button_type_close" aria-label="Закрыть"></button>
+        <figure class="place">
+          <img src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg" class="place__image">
+          <figcaption class="place__capture">Карачаево-Черкессия</figcaption>
+        </figure>
+      </div>
+    </div>
+  </template>
   <template id="card-template">
     <article class="card">
       <img class="card__image" src="images/dombay.jpg" alt="Домбай">
@@ -81,90 +87,146 @@
   </template>
   <!-- Popup -->
   <script lang="javascript">
-    const openPopup = (popup) => {
-      popup.classList.remove("popup_hidden")
-    }
     const closePopup = (popup) => {
+      popup.addEventListener("transitionend", () => {
+        popup.remove();
+      })
       popup.classList.add("popup_hidden")
     }
 
-    // Добавляет функционал закрытия всем модальным окнам
-    document.querySelectorAll(".popup").forEach((popup) => {
-      popup.querySelectorAll(".popup__close").forEach((closeButton) => {
-        closeButton.addEventListener("click", () => {
-          closePopup(popup)
-        })
-      })
-    })
-  </script>
-  <!-- Изменение профиля -->
-  <script>
-    // Добавляет функционал открытия модального окна редактирования профиля
-    const profileName = document.querySelector(".profile__name");
-    const profileDescription = document.querySelector(".profile__description");
-    const profileEdit = document.querySelector(".profile__edit");
-
-    const editProfilePopup = document.querySelector("#profile-edit-popup");
-    const editProfileForm = editProfilePopup.querySelector("form");
-    const editProfileNameInput = editProfileForm.elements.name;
-    const editProfileDescriptionInput = editProfileForm.elements.description;
-
-    const cards = document.querySelector(".cards")
-
-    const updateProfileEditForm = (name, description) => {
-      editProfileNameInput.value = name
-      editProfileDescriptionInput.value = description
-    }
-
-    const updateProfile = (name, description) => {
+    const updateProfile = ({name, description}, profile) => {
+      const profileName = profile.querySelector(".profile__name")
+      const profileDescription = profile.querySelector(".profile__description")
       profileName.textContent = name;
       profileDescription.textContent = description;
-      cards.setAttribute("aria-label", `Карточки пользователя ${name}`)
     }
 
-    profileEdit.addEventListener("click", () => {
-      updateProfileEditForm(profileName.textContent, profileDescription.textContent)
-      openPopup(editProfilePopup)
-    })
+    // Указывает контейнер для всех popup
+    const popupsRoot = document.querySelector(".page");
 
-    editProfileForm.addEventListener("submit", (e) => {
-      updateProfile(editProfileNameInput.value, editProfileDescriptionInput.value);
-      closePopup(editProfilePopup);
-      e.preventDefault();
-    })
-  </script>
-  <!-- Рендер карточек -->
-  <script lang="javascript">
-    const cardPopup = document.querySelector("#card-popup");
-    const cardPopupImage = cardPopup.querySelector(".place__image");
-    const cardPopupCapture = cardPopup.querySelector(".place__capture");
+    // Указывает контейнер для всех карточек
+    const cardsRoot = document.querySelector(".cards");
 
-    const renderCard = (card, container) => {
-      const cardTemplate = document.querySelector("#card-template");
-      const cardElement = cardTemplate.content.querySelector(".card").cloneNode(true);
-      const cardImage = cardElement.querySelector(".card__image");
-      cardImage.src = card.link;
-      cardImage.alt = card.name;
-      cardElement.querySelector(".card__name").textContent = card.name;
+    // Popup изменения профиля
+    const editProfilePopupTemplate = document.querySelector("#edit-profile-popup");
+    const renderEditProfilePopup = ({name, description, profile}, container) => {
+      const popup = editProfilePopupTemplate.content.querySelector(".popup").cloneNode(true);
 
-      const cardLikeButton = cardElement.querySelector(".card__like")
-      cardLikeButton.addEventListener("click", () => {
-        cardLikeButton.classList.toggle("card__like_liked");
+      // Элементы
+      const closeButton = popup.querySelector(".popup__close");
+      const form = popup.querySelector("form");
+      const nameInput = form.elements.name;
+      const descriptionInput = form.elements.description;
+
+      // Данные
+      nameInput.value = name;
+      descriptionInput.value = description;
+
+      // События
+      closeButton.addEventListener("click", () => closePopup(popup))
+      form.addEventListener("submit", (e) => {
+        updateProfile({name: nameInput.value, description: descriptionInput.value}, profile);
+        closePopup(popup);
+        e.preventDefault();
       })
 
-      const cardDeleteButton = cardElement.querySelector(".card__delete")
+      // Рендер
+      container.appendChild(popup);
+      return popup;
+    }
+
+    // Popup для создания карточки
+    const addCardPopupTemplate = document.querySelector("#add-card-popup");
+    const renderAddCardPopup = (data, container) => {
+      const popup = addCardPopupTemplate.content.querySelector(".popup").cloneNode(true);
+
+      // Элементы
+      const closeButton = popup.querySelector(".popup__close");
+      const form = popup.querySelector("form");
+      const nameInput = form.elements.name;
+      const linkInput = form.elements.link;
+
+      // События
+      closeButton.addEventListener("click", () => closePopup(popup))
+      form.addEventListener("submit", (e) => {
+        renderCard({name: nameInput.value, link: linkInput.value}, cardsRoot)
+        closePopup(popup)
+        e.preventDefault();
+      })
+
+      // Рендер
+      container.appendChild(popup);
+      return popup;
+    }
+
+    // Popup места
+    const placePopupTemplate = document.querySelector("#place-popup");
+    const renderPlacePopup = ({name, link}, container) => {
+      const popup = placePopupTemplate.content.querySelector(".popup").cloneNode(true);
+
+      // Элементы
+      const placeImage = popup.querySelector(".place__image");
+      const placeName = popup.querySelector(".place__capture");
+      const closeButton = popup.querySelector(".popup__close");
+
+      // Данные
+      placeImage.src = link;
+      placeImage.alt = name;
+      placeName.textContent = name;
+
+      // События
+      closeButton.addEventListener("click", () => closePopup(popup))
+
+      // Рендер
+      container.appendChild(popup);
+      return popup;
+    }
+
+    // Карточка места
+    const toggleLike = (likeButton) => {
+      likeButton.classList.toggle("card__like_liked");
+    }
+    const cardTemplate = document.querySelector("#card-template");
+    const renderCard = ({name, link}, container) => {
+      const card = cardTemplate.content.querySelector(".card").cloneNode(true);
+
+      // Элементы
+      const cardImage = card.querySelector(".card__image");
+      const cardName = card.querySelector(".card__name");
+      const cardLikeButton = card.querySelector(".card__like")
+      const cardDeleteButton = card.querySelector(".card__delete")
+
+      // Данные
+      cardImage.src = link;
+      cardImage.alt = name;
+      cardName.textContent = name;
+
+      // События
+      cardLikeButton.addEventListener("click", () => toggleLike(cardLikeButton))
       cardDeleteButton.addEventListener("click", () => {
-        cardElement.remove();
+        card.remove();
+      })
+      cardImage.addEventListener("click", () => {
+        renderPlacePopup({name: name, link: link}, popupsRoot);
       })
 
-      cardImage.addEventListener("click", (e) => {
-        cardPopupImage.src = card.link
-        cardPopupCapture.textContent = card.name
-        openPopup(cardPopup);
-      })
-
-      container.appendChild(cardElement);
+      // Рендер
+      container.appendChild(card);
+      return card;
     }
+
+    // Привязывает popup изменения профиля к кнопке
+    const profile = document.querySelector(".profile");
+    const profileName = profile.querySelector(".profile__name");
+    const profileDescription = profile.querySelector(".profile__description");
+    document.querySelector(".profile__edit").addEventListener("click", () => {
+      renderEditProfilePopup({name: profileName.textContent, description: profileDescription.textContent, profile}, popupsRoot);
+    })
+
+    // Привязывает popup добавления места к кнопке
+    document.querySelector(".top-bar__add").addEventListener("click", () => {
+      renderAddCardPopup({}, popupsRoot);
+    })
 
     // Начальные карточки
     const initialCards = [
@@ -194,34 +256,8 @@
       }
     ];
 
-    const cardsSection = document.querySelector(".cards");
     initialCards.forEach((card) => {
-      renderCard(card, cardsSection)
-    })
-  </script>
-  <!-- Добавление карточек -->
-  <script>
-    // Добавляет функциональность открытия модального окна создания карточки
-    const addCardButton = document.querySelector(".top-bar__add");
-
-    const addCardPopup = document.querySelector("#add-card-popup");
-    const addCardForm = addCardPopup.querySelector("form");
-    const addCardNameInput = addCardForm.elements.name;
-    const addCardLinkInput = addCardForm.elements.link;
-
-    addCardButton.addEventListener("click", () => {
-      addCardNameInput.value = ""
-      addCardLinkInput.value = ""
-      openPopup(addCardPopup)
-    })
-
-    addCardForm.addEventListener("submit", (e) => {
-      renderCard({
-        name: addCardNameInput.value,
-        link: addCardLinkInput.value
-      }, cards)
-      closePopup(addCardPopup)
-      e.preventDefault()
+      renderCard(card, cardsRoot)
     })
   </script>
 </body>
