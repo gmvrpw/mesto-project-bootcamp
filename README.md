@@ -8,15 +8,16 @@
 
 Проект-соцсеть с местами, в которых побывали пользователи.
 
-## Дизайн
+## Возможности 
 
-[Ссылка на макет в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
+Изменяйте профиль, добавляйте новые места и оценивате созданные ранее!
 
 ## Техническая часть
 
 * **Технологии**
     * [HTML5](https://www.w3.org/TR/2011/WD-html5-20110405/)
     * [CSS3](https://www.w3.org/Style/CSS/specs.en.html)
+    * [JS](https://www.w3.org/standards/webdesign/script)
 * **Методологии**
     * [BEM](https://en.bem.info/methodology/) 
 
