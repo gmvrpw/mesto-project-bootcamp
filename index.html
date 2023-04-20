@@ -8,6 +8,41 @@
 </head>
 <body>
   <div class="page">
+    <div id="edit-profile-popup" class="popup popup_hidden">
+      <div class="popup__content">
+        <button type="button" class="popup__close button button_type_close" aria-label="Закрыть"></button>
+        <form class="edit-form">
+          <h3 class="edit-form__title">Редактировать профиль</h3>
+          <div class="edit-form__inputs">
+            <input type="text" name="name" class="edit-form__text-input text-input" placeholder="Имя пользователя" aria-label="Имя пользователя">
+            <input type="text" name="description" class="edit-form__text-input text-input" placeholder="Описание" aria-label="Описание">
+          </div>
+          <button type="submit" class="edit-form__submit button button_type_save">Сохранить</button>
+        </form>
+      </div>
+    </div>
+    <div id="add-card-popup" class="popup popup_hidden">
+      <div class="popup__content">
+        <button type="button" class="popup__close button button_type_close" aria-label="Закрыть"></button>
+        <form class="edit-form">
+          <h3 class="edit-form__title">Новое место</h3>
+          <div class="edit-form__inputs">
+            <input type="text" name="name" class="edit-form__text-input text-input" placeholder="Название" aria-label="Название">
+            <input type="text" name="link" class="edit-form__text-input text-input" placeholder="Ссылка на картинку" aria-label="Ссылка на картинку">
+          </div>
+          <button type="submit" class="edit-form__submit button button_type_save">Сохранить</button>
+        </form>
+      </div>
+    </div>
+    <div id="place-popup" class="popup popup_hidden">
+      <div class="popup__content popup__content_type_image">
+        <button type="button" class="popup__close button button_type_close" aria-label="Закрыть"></button>
+        <figure class="place">
+          <img src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg" class="place__image">
+          <figcaption class="place__capture">Карачаево-Черкессия</figcaption>
+        </figure>
+      </div>
+    </div>
     <div class="page__container">
       <header class="page__header header">
         <img src="./images/logo.svg" class="header__image" alt='Логотип "Место"'>
@@ -34,47 +69,6 @@
       </footer>
     </div>
   </div>
-  <template id="edit-profile-popup">
-    <div class="popup">
-      <div class="popup__content">
-        <button type="button" class="popup__close button button_type_close" aria-label="Закрыть"></button>
-        <form class="edit-form">
-          <h3 class="edit-form__title">Редактировать профиль</h3>
-          <div class="edit-form__inputs">
-            <input type="text" name="name" class="edit-form__text-input text-input" placeholder="Имя пользователя" aria-label="Имя пользователя">
-            <input type="text" name="description" class="edit-form__text-input text-input" placeholder="Описание" aria-label="Описание">
-          </div>
-          <button type="submit" class="edit-form__submit button button_type_save">Сохранить</button>
-        </form>
-      </div>
-    </div>
-  </template>
-  <template id="add-card-popup">
-    <div class="popup">
-      <div class="popup__content">
-        <button type="button" class="popup__close button button_type_close" aria-label="Закрыть"></button>
-        <form class="edit-form">
-          <h3 class="edit-form__title">Новое место</h3>
-          <div class="edit-form__inputs">
-            <input type="text" name="name" class="edit-form__text-input text-input" placeholder="Название" aria-label="Название">
-            <input type="text" name="link" class="edit-form__text-input text-input" placeholder="Ссылка на картинку" aria-label="Ссылка на картинку">
-          </div>
-          <button type="submit" class="edit-form__submit button button_type_save">Сохранить</button>
-        </form>
-      </div>
-    </div>
-  </template>
-  <template id="place-popup">
-    <div class="popup">места
-      <div class="popup__content popup__content_type_image">
-        <button type="button" class="popup__close button button_type_close" aria-label="Закрыть"></button>
-        <figure class="place">
-          <img src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg" class="place__image">
-          <figcaption class="place__capture">Карачаево-Черкессия</figcaption>
-        </figure>
-      </div>
-    </div>
-  </template>
   <template id="card-template">
     <article class="card">
       <img class="card__image" src="images/dombay.jpg" alt="Домбай">
@@ -85,180 +79,6 @@
       <button type="button" class="card__delete button button_type_delete" aria-label="Удалить"></button>
     </article>
   </template>
-  <!-- Popup -->
-  <script lang="javascript">
-    const closePopup = (popup) => {
-      popup.addEventListener("transitionend", () => {
-        popup.remove();
-      })
-      popup.classList.add("popup_hidden")
-    }
-
-    const updateProfile = ({name, description}, profile) => {
-      const profileName = profile.querySelector(".profile__name")
-      const profileDescription = profile.querySelector(".profile__description")
-      profileName.textContent = name;
-      profileDescription.textContent = description;
-    }
-
-    // Указывает контейнер для всех popup
-    const popupsRoot = document.querySelector(".page");
-
-    // Указывает контейнер для всех карточек
-    const cardsRoot = document.querySelector(".cards");
-
-    // Popup изменения профиля
-    const editProfilePopupTemplate = document.querySelector("#edit-profile-popup");
-    const renderEditProfilePopup = ({name, description, profile}, container) => {
-      const popup = editProfilePopupTemplate.content.querySelector(".popup").cloneNode(true);
-
-      // Элементы
-      const closeButton = popup.querySelector(".popup__close");
-      const form = popup.querySelector("form");
-      const nameInput = form.elements.name;
-      const descriptionInput = form.elements.description;
-
-      // Данные
-      nameInput.value = name;
-      descriptionInput.value = description;
-
-      // События
-      closeButton.addEventListener("click", () => closePopup(popup))
-      form.addEventListener("submit", (e) => {
-        updateProfile({name: nameInput.value, description: descriptionInput.value}, profile);
-        closePopup(popup);
-        e.preventDefault();
-      })
-
-      // Рендер
-      container.appendChild(popup);
-      return popup;
-    }
-
-    // Popup для создания карточки
-    const addCardPopupTemplate = document.querySelector("#add-card-popup");
-    const renderAddCardPopup = (data, container) => {
-      const popup = addCardPopupTemplate.content.querySelector(".popup").cloneNode(true);
-
-      // Элементы
-      const closeButton = popup.querySelector(".popup__close");
-      const form = popup.querySelector("form");
-      const nameInput = form.elements.name;
-      const linkInput = form.elements.link;
-
-      // События
-      closeButton.addEventListener("click", () => closePopup(popup))
-      form.addEventListener("submit", (e) => {
-        renderCard({name: nameInput.value, link: linkInput.value}, cardsRoot)
-        closePopup(popup)
-        e.preventDefault();
-      })
-
-      // Рендер
-      container.appendChild(popup);
-      return popup;
-    }
-
-    // Popup места
-    const placePopupTemplate = document.querySelector("#place-popup");
-    const renderPlacePopup = ({name, link}, container) => {
-      const popup = placePopupTemplate.content.querySelector(".popup").cloneNode(true);
-
-      // Элементы
-      const placeImage = popup.querySelector(".place__image");
-      const placeName = popup.querySelector(".place__capture");
-      const closeButton = popup.querySelector(".popup__close");
-
-      // Данные
-      placeImage.src = link;
-      placeImage.alt = name;
-      placeName.textContent = name;
-
-      // События
-      closeButton.addEventListener("click", () => closePopup(popup))
-
-      // Рендер
-      container.appendChild(popup);
-      return popup;
-    }
-
-    // Карточка места
-    const toggleLike = (likeButton) => {
-      likeButton.classList.toggle("card__like_liked");
-    }
-    const cardTemplate = document.querySelector("#card-template");
-    const renderCard = ({name, link}, container) => {
-      const card = cardTemplate.content.querySelector(".card").cloneNode(true);
-
-      // Элементы
-      const cardImage = card.querySelector(".card__image");
-      const cardName = card.querySelector(".card__name");
-      const cardLikeButton = card.querySelector(".card__like")
-      const cardDeleteButton = card.querySelector(".card__delete")
-
-      // Данные
-      cardImage.src = link;
-      cardImage.alt = name;
-      cardName.textContent = name;
-
-      // События
-      cardLikeButton.addEventListener("click", () => toggleLike(cardLikeButton))
-      cardDeleteButton.addEventListener("click", () => {
-        card.remove();
-      })
-      cardImage.addEventListener("click", () => {
-        renderPlacePopup({name: name, link: link}, popupsRoot);
-      })
-
-      // Рендер
-      container.appendChild(card);
-      return card;
-    }
-
-    // Привязывает popup изменения профиля к кнопке
-    const profile = document.querySelector(".profile");
-    const profileName = profile.querySelector(".profile__name");
-    const profileDescription = profile.querySelector(".profile__description");
-    document.querySelector(".profile__edit").addEventListener("click", () => {
-      renderEditProfilePopup({name: profileName.textContent, description: profileDescription.textContent, profile}, popupsRoot);
-    })
-
-    // Привязывает popup добавления места к кнопке
-    document.querySelector(".top-bar__add").addEventListener("click", () => {
-      renderAddCardPopup({}, popupsRoot);
-    })
-
-    // Начальные карточки
-    const initialCards = [
-      {
-        name: 'Архыз',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-      },
-      {
-        name: 'Челябинская область',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-      },
-      {
-        name: 'Иваново',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-      },
-      {
-        name: 'Камчатка',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-      },
-      {
-        name: 'Холмогорский район',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-      },
-      {
-        name: 'Байкал',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-      }
-    ];
-
-    initialCards.forEach((card) => {
-      renderCard(card, cardsRoot)
-    })
-  </script>
+  <script lang="javascript" src="scripts/index.js"></script>
 </body>
 </html>
