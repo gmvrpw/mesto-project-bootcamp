@@ -11,14 +11,6 @@
     align-items: center;
     justify-content: center;
     background-color: var(--clr-ntrl-dkr-50);
-    animation: fade-in linear 200ms;
-}
-
-@keyframes fade-in {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
+    visibility: visible;
+    opacity: 1;
 }
