@@ -13,4 +13,5 @@
     background-color: var(--clr-ntrl-dkr-50);
     visibility: visible;
     opacity: 1;
+    transition: linear opacity 200ms 0ms, visibility 0ms 0ms;
 }

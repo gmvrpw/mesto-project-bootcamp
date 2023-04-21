@@ -1,4 +1,5 @@
 .popup_hidden {
     visibility: hidden;
     opacity: 0;
+    transition: linear opacity 200ms 0ms, visibility 0ms 200ms;
 }

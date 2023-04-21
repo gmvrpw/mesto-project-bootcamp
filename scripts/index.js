@@ -1,133 +1,69 @@
-const openPopup = (popup) => {
-  popup.addEventListener("transitionend", () => {
-    popup.classList.remove("popup_transition_opening");
-  }, {once: true})
+// Общие (не зависящие от контекста) функции
+function renderToStart(container, ...items) {
+  container.prepend(...items);
+}
 
+function openPopup(popup) {
   popup.classList.remove("popup_hidden");
-  popup.classList.add("popup_transition_opening");
 }
 
-const closePopup = (popup) => {
-  popup.addEventListener("transitionend", () => {
-    popup.classList.remove("popup_transition_closing");
-    popup.classList.add("popup_hidden");
-  }, {once: true})
-
-  popup.classList.add("popup_transition_closing");
+function closePopup (popup) {
+  popup.classList.add("popup_hidden");
 }
 
-const setupTopBar = () => {
-  const topBarAddButton = document.querySelector(".top-bar__add");
-  topBarAddButton.addEventListener("click", () => {
-    openAddCardPopup();
-  })
-}
+document.querySelectorAll(".popup__close").forEach((closeButton) => {
+  const associatedPopup = closeButton.closest(".popup");
+  closeButton.addEventListener("click", closePopup.bind(undefined, associatedPopup));
+})
 
-// Профиль
-const setupProfile = () => {
-  const profile = document.querySelector(".profile");
-  const profileName = profile.querySelector(".profile__name");
-  const profileDescription = profile.querySelector(".profile__description");
-  const profileEdit = document.querySelector(".profile__edit");
+// Константы элементов
+const placePopup = document.querySelector("#place-popup");
+const placePopupImage = placePopup.querySelector(".place__image");
+const placePopupName = placePopup.querySelector(".place__capture");
 
-  profileEdit.addEventListener("click", () => {
-    updateProfileEditPopup(profileName.textContent, profileDescription.textContent);
-    openProfileEditPopup();
-  })
+const editProfilePopup = document.querySelector("#edit-profile-popup");
+const editProfilePopupForm = editProfilePopup.querySelector(".edit-form");
+const editProfilePopupNameInput = editProfilePopupForm.elements.name;
+const editProfilePopupDescriptionInput = editProfilePopupForm.elements.description;
 
-  return profile;
-}
-const updateProfile = ({name, description}, profile) => {
-  const profileName = profile.querySelector(".profile__name")
-  const profileDescription = profile.querySelector(".profile__description")
+const addPlacePopup = document.querySelector("#add-place-popup");
+const addPlacePopupForm = addPlacePopup.querySelector(".edit-form");
+const addPlacePopupNameInput = addPlacePopupForm.elements.name;
+const addPlacePopupLinkInput = addPlacePopupForm.elements.link;
+
+const topBar = document.querySelector(".top-bar");
+const topBarAddButton = topBar.querySelector(".top-bar__add");
+
+const profile = document.querySelector(".profile");
+const profileName = profile.querySelector(".profile__name");
+const profileDescription = profile.querySelector(".profile__description");
+const profileEditButton = profile.querySelector(".profile__edit");
+
+const cards = document.querySelector(".cards");
+const cardTemplate = document.querySelector("#card-template");
+
+// Функции "поддержки" состояний
+const setProfile = ({name, description}) => {
   profileName.textContent = name;
   profileDescription.textContent = description;
 }
 
-// Popup изменения профиля
-const setupEditProfilePopup = (profile) => {
-  const popup = document.querySelector("#edit-profile-popup");
-  const closeButton = popup.querySelector(".popup__close");
-  const form = popup.querySelector("form");
-  const nameInput = form.elements.name;
-  const descriptionInput = form.elements.description;
-
-  closeButton.addEventListener("click", () => closePopup(popup))
-  form.addEventListener("submit", (e) => {
-    updateProfile({name: nameInput.value, description: descriptionInput.value}, profile);
-    closePopup(popup);
-    e.preventDefault();
-  })
-
-  return popup;
-}
-const openProfileEditPopup = () => {
-  const popup = document.querySelector("#edit-profile-popup");
-  openPopup(popup);
-}
-const updateProfileEditPopup = (name, description) => {
-  const popup = document.querySelector("#edit-profile-popup");
-  const form = popup.querySelector("form");
-  const nameInput = form.elements.name;
-  const descriptionInput = form.elements.description;
-
-  nameInput.value = name;
-  descriptionInput.value = description
+const setPlaceToPlacePopup = ({name, link}) => {
+  placePopupName.textContent = name;
+  placePopupImage.src = link;
+  placePopupImage.alt = name;
 }
 
-
-// Popup для создания карточки
-const setupAddCardPopup = (cardsRoot) => {
-  const popup = document.querySelector("#add-card-popup");
-  const closeButton = popup.querySelector(".popup__close");
-  const form = popup.querySelector("form");
-  const nameInput = form.elements.name;
-  const linkInput = form.elements.link;
-
-  closeButton.addEventListener("click", () => closePopup(popup))
-  form.addEventListener("submit", (e) => {
-    renderCard({name: nameInput.value, link: linkInput.value}, cardsRoot)
-    closePopup(popup)
-    e.preventDefault();
-  })
-
-  return popup;
-}
-const openAddCardPopup = () => {
-  const popup = document.querySelector("#add-card-popup");
-  openPopup(popup);
+const setDefaultValuesToEditProfileForm = ({name, description}) => {
+  editProfilePopupNameInput.value = name;
+  editProfilePopupDescriptionInput.value = description;
 }
 
-// Popup места
-const setupPlacePopup = () => {
-  const popup = document.querySelector("#place-popup")
-  const closeButton = popup.querySelector(".popup__close");
-
-  closeButton.addEventListener("click", () => closePopup(popup))
-
-  return popup;
-}
-const openPlacePopup = () => {
-  const popup = document.querySelector("#place-popup");
-  openPopup(popup);
-}
-const updatePlacePopup = (name, link) => {
-  const popup = document.querySelector("#place-popup");
-  const placeName = popup.querySelector(".place__capture");
-  const placeImage = popup.querySelector(".place__image");
-
-  placeName.textContent = name;
-  placeImage.src = link;
-  placeImage.alt = name;
-}
-
-
-// Карточка места
 const toggleLike = (likeButton) => {
   likeButton.classList.toggle("card__like_liked");
 }
-const cardTemplate = document.querySelector("#card-template");
-const renderCard = ({name, link}, container) => {
+
+const createCard = ({name, link}) => {
   const card = cardTemplate.content.querySelector(".card").cloneNode(true);
 
   // Элементы
@@ -147,17 +83,54 @@ const renderCard = ({name, link}, container) => {
     card.remove();
   })
   cardImage.addEventListener("click", () => {
-    updatePlacePopup(name, link);
-    openPlacePopup();
+    setPlaceToPlacePopup({name, link});
+    openPopup(placePopup);
   })
 
-  // Рендер
-  container.appendChild(card);
   return card;
 }
 
-// Начальные карточки
-const initialCards = [
+// Основные слушатели для блоков
+const setupEditProfilePopup = () => {
+  editProfilePopupForm.addEventListener("submit", (e) => {
+    setProfile({
+      name: editProfilePopupNameInput.value,
+      description: editProfilePopupDescriptionInput.value
+    });
+    closePopup(editProfilePopup);
+    e.preventDefault();
+  })
+}
+
+const setupAddPlacePopup = () => {
+  addPlacePopupForm.addEventListener("submit", (e) => {
+    renderToStart(cards, createCard({
+      name: addPlacePopupNameInput.value,
+      link: addPlacePopupLinkInput.value
+    }))
+    addPlacePopupForm.reset();
+    closePopup(addPlacePopup);
+    e.preventDefault();
+  })
+}
+
+const setupProfile = () => {
+  profileEditButton.addEventListener("click", () => {
+    setDefaultValuesToEditProfileForm({
+      name: profileName.textContent,
+      description: profileDescription.textContent
+    });
+    openPopup(editProfilePopup);
+  })
+}
+
+const setupTopBar = () => {
+  topBarAddButton.addEventListener("click", () => {
+    openPopup(addPlacePopup);
+  })
+}
+
+const initialPlaces = [
   {
     name: 'Архыз',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
@@ -184,15 +157,9 @@ const initialCards = [
   }
 ];
 
-document.addEventListener("DOMContentLoaded", () => {
-  const cardsRoot = document.querySelector(".cards");
+setupTopBar();
+setupProfile();
+setupAddPlacePopup();
+setupEditProfilePopup();
 
-  setupTopBar();
-  setupEditProfilePopup(setupProfile());
-  setupAddCardPopup(cardsRoot);
-
-  setupPlacePopup();
-  initialCards.forEach((card) => {
-    renderCard(card, cardsRoot)
-  })
-})
+renderToStart(cards, ...initialPlaces.map((placeData) => createCard(placeData)))
