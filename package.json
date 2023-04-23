@@ -1,0 +1,38 @@
+{
+  "name": "mesto-project-bootcamp",
+  "version": "1.0.0",
+  "description": "> Лучшие места со всего мира **[здесь](https://gmvrpw.github.io/mesto-project-bootcamp/)**. >  <img src=\"./repository-lead-image.jpg\" alt='Вырезка из картины \"Опять двойка\" Фёдора Решетникова'/>",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack serve",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gmvrpw/mesto-project-bootcamp.git"
+  },
+  "author": "Aleksander Boiarnikov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gmvrpw/mesto-project-bootcamp/issues"
+  },
+  "homepage": "https://github.com/gmvrpw/mesto-project-bootcamp#readme",
+  "devDependencies": {
+    "@babel/core": "^7.21.4",
+    "@babel/preset-env": "^7.21.4",
+    "autoprefixer": "^10.4.14",
+    "babel-loader": "^9.1.2",
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^6.7.3",
+    "cssnano": "^6.0.0",
+    "html-webpack-plugin": "^5.5.1",
+    "mini-css-extract-plugin": "^2.7.5",
+    "postcss-loader": "^7.2.4",
+    "webpack": "^5.80.0",
+    "webpack-cli": "^5.0.2",
+    "webpack-dev-server": "^4.13.3"
+  },
+  "dependencies": {
+    "core-js": "^3.30.1"
+  }
+}
