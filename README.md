@@ -18,6 +18,8 @@
     * [HTML5](https://www.w3.org/TR/2011/WD-html5-20110405/)
     * [CSS3](https://www.w3.org/Style/CSS/specs.en.html)
     * [JS](https://www.w3.org/standards/webdesign/script)
+* **Сборщик**
+    * [Webpack](https://webpack.js.org/)
 * **Методологии**
     * [BEM](https://en.bem.info/methodology/) 
 
