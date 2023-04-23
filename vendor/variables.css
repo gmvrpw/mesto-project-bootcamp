@@ -8,6 +8,8 @@
     --clr-ntrl-dkr-50: rgba(0, 0, 0, 0.5);
     --clr-ntrl-dkr-20: rgba(0, 0, 0, 0.2);
 
+    --clr-negative: #ff0000;
+
     /* нормализованное значение перехода (линейного) */
     --norm-s: clamp(0px, calc((100vw - 768px) / (880 - 640)), 1px);
     --norm-xs: clamp(0px, calc((100vw - 320px) / (640 - 320)), 1px);

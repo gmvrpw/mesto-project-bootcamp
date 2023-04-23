@@ -48,6 +48,7 @@
 @import "../blocks/form/__text-input-error/form__text-input-error.css";
 @import "../blocks/form/__text-input-error/_hidden/form__text-input-error_hidden.css";
 @import "../blocks/form/__submit/form__submit.css";
+@import "../blocks/form/__submit/_disabled/form__submit_disabled.css";
 @import "../blocks/place/place.css";
 @import "../blocks/place/__image/place__image.css";
 @import "../blocks/place/__capture/place__capture.css";
