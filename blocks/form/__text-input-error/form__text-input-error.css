@@ -1,0 +1,9 @@
+.form__text-input-error {
+    margin: 0;
+    padding: 0;
+    height: 14px;
+    visibility: visible;
+    line-height: 14px;
+    font-size: calc(1px * var(--fs-s));
+    color: var(--clr-negative);
+}

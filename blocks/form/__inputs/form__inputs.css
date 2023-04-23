@@ -1,4 +1,4 @@
-.edit-form__inputs {
+.form__inputs {
     padding: calc(76px - 24 * var(--norm-xs)) 0 48px 0;
     display: flex;
     flex-direction: column;

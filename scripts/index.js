@@ -32,23 +32,18 @@ document.querySelectorAll(".popup").forEach((popup) => {
   });
 })
 
-document.querySelectorAll(".popup__close").forEach((closeButton) => {
-  const associatedPopup = closeButton.closest(".popup");
-  closeButton.addEventListener("click", closePopup.bind(undefined, associatedPopup));
-})
-
 // Константы элементов
 const placePopup = document.querySelector("#place-popup");
 const placePopupImage = placePopup.querySelector(".place__image");
 const placePopupName = placePopup.querySelector(".place__capture");
 
 const editProfilePopup = document.querySelector("#edit-profile-popup");
-const editProfilePopupForm = editProfilePopup.querySelector(".edit-form");
+const editProfilePopupForm = editProfilePopup.querySelector(".form");
 const editProfilePopupNameInput = editProfilePopupForm.elements.name;
 const editProfilePopupDescriptionInput = editProfilePopupForm.elements.description;
 
 const addPlacePopup = document.querySelector("#add-place-popup");
-const addPlacePopupForm = addPlacePopup.querySelector(".edit-form");
+const addPlacePopupForm = addPlacePopup.querySelector(".form");
 const addPlacePopupNameInput = addPlacePopupForm.elements.name;
 const addPlacePopupLinkInput = addPlacePopupForm.elements.link;
 
@@ -113,6 +108,7 @@ const createCard = ({name, link}) => {
 
 // Основные слушатели для блоков
 const setupEditProfilePopup = () => {
+  enableValidation()
   editProfilePopupForm.addEventListener("submit", (e) => {
     setProfile({
       name: editProfilePopupNameInput.value,
