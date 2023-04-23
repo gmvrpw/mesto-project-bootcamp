@@ -32,25 +32,26 @@ document.querySelectorAll(".popup").forEach((popup) => {
   });
 })
 
-document.querySelectorAll(".popup__close").forEach((closeButton) => {
-  const associatedPopup = closeButton.closest(".popup");
-  closeButton.addEventListener("click", closePopup.bind(undefined, associatedPopup));
-})
-
 // Константы элементов
 const placePopup = document.querySelector("#place-popup");
 const placePopupImage = placePopup.querySelector(".place__image");
 const placePopupName = placePopup.querySelector(".place__capture");
 
 const editProfilePopup = document.querySelector("#edit-profile-popup");
-const editProfilePopupForm = editProfilePopup.querySelector(".edit-form");
+const editProfilePopupForm = editProfilePopup.querySelector(".form");
 const editProfilePopupNameInput = editProfilePopupForm.elements.name;
+const editProfilePopupNameInputError = editProfilePopupForm.querySelector("#profile-name-input-error");
 const editProfilePopupDescriptionInput = editProfilePopupForm.elements.description;
+const editProfilePopupDescriptionInputError = editProfilePopupForm.querySelector("#profile-description-input-error");
+const editProfilePopupSubmitButton = editProfilePopupForm.querySelector(".form__submit");
 
 const addPlacePopup = document.querySelector("#add-place-popup");
-const addPlacePopupForm = addPlacePopup.querySelector(".edit-form");
+const addPlacePopupForm = addPlacePopup.querySelector(".form");
 const addPlacePopupNameInput = addPlacePopupForm.elements.name;
+const addPlacePopupNameInputError = addPlacePopupForm.querySelector("#place-name-input-error");
 const addPlacePopupLinkInput = addPlacePopupForm.elements.link;
+const addPlacePopupLinkInputError = addPlacePopupForm.querySelector("#place-link-input-error");
+const addPlacePopupSubmitButton = addPlacePopupForm.querySelector(".form__submit");
 
 const topBar = document.querySelector(".top-bar");
 const topBarAddButton = topBar.querySelector(".top-bar__add");
@@ -62,6 +63,78 @@ const profileEditButton = profile.querySelector(".profile__edit");
 
 const cards = document.querySelector(".cards");
 const cardTemplate = document.querySelector("#card-template");
+
+// Объекты валидации
+const editProfileFormValidationObject = {
+  element: editProfilePopupForm,
+    inputs: {
+  name: {
+    element: editProfilePopupNameInput,
+      modifiers: {
+      invalid: "form__text-input_invalid"
+    },
+    error: {
+      element: editProfilePopupNameInputError,
+        modifiers: {
+        hidden: "form__text-input-error_hidden"
+      }
+    }
+  },
+  description: {
+    element: editProfilePopupDescriptionInput,
+      modifiers: {
+      invalid: "form__text-input_invalid"
+    },
+    error: {
+      element: editProfilePopupDescriptionInputError,
+        modifiers: {
+        hidden: "form__text-input-error_hidden"
+      }
+    }
+  }
+},
+  submit: {
+    element: editProfilePopupSubmitButton,
+      modifiers: {
+      disabled: "form__submit_disabled"
+    }
+  }
+}
+const addPlaceFormValidationObject = {
+  element: addPlacePopupForm,
+  inputs: {
+    name: {
+      element: addPlacePopupNameInput,
+      modifiers: {
+        invalid: "form__text-input_invalid"
+      },
+      error: {
+        element: addPlacePopupNameInputError,
+        modifiers: {
+          hidden: "form__text-input-error_hidden"
+        }
+      }
+    },
+    description: {
+      element: addPlacePopupLinkInput,
+      modifiers: {
+        invalid: "form__text-input_invalid"
+      },
+      error: {
+        element: addPlacePopupLinkInputError,
+        modifiers: {
+          hidden: "form__text-input-error_hidden"
+        }
+      }
+    }
+  },
+  submit: {
+    element: addPlacePopupSubmitButton,
+    modifiers: {
+      disabled: "form__submit_disabled"
+    }
+  }
+}
 
 // Функции "поддержки" состояний
 const setProfile = ({name, description}) => {
@@ -75,9 +148,15 @@ const setPlaceToPlacePopup = ({name, link}) => {
   placePopupImage.alt = name;
 }
 
+const resetAddPlaceForm = () => {
+  addPlacePopupForm.reset();
+  validateForm(addPlaceFormValidationObject);
+}
+
 const setDefaultValuesToEditProfileForm = ({name, description}) => {
   editProfilePopupNameInput.value = name;
   editProfilePopupDescriptionInput.value = description;
+  validateForm(editProfileFormValidationObject);
 }
 
 const toggleLike = (likeButton) => {
@@ -113,6 +192,7 @@ const createCard = ({name, link}) => {
 
 // Основные слушатели для блоков
 const setupEditProfilePopup = () => {
+  enableValidation(editProfileFormValidationObject)
   editProfilePopupForm.addEventListener("submit", (e) => {
     setProfile({
       name: editProfilePopupNameInput.value,
@@ -124,12 +204,12 @@ const setupEditProfilePopup = () => {
 }
 
 const setupAddPlacePopup = () => {
+  enableValidation(addPlaceFormValidationObject);
   addPlacePopupForm.addEventListener("submit", (e) => {
     renderToStart(cards, createCard({
       name: addPlacePopupNameInput.value,
       link: addPlacePopupLinkInput.value
     }))
-    addPlacePopupForm.reset();
     closePopup(addPlacePopup);
     e.preventDefault();
   })
@@ -147,6 +227,7 @@ const setupProfile = () => {
 
 const setupTopBar = () => {
   topBarAddButton.addEventListener("click", () => {
+    resetAddPlaceForm();
     openPopup(addPlacePopup);
   })
 }

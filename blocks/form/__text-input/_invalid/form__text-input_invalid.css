@@ -1,0 +1,3 @@
+.text-input_invalid {
+    border-color: var(--clr-negative);
+}

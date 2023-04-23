@@ -1,0 +1,11 @@
+.form__submit_disabled {
+    border: 1px solid var(--clr-ntrl-dkr);
+    background-color: var(--clr-ntrl-ltr);
+    color: var(--clr-ntrl-dkr);
+    opacity: 0.2;
+    cursor: default;
+}
+
+.form__submit_disabled:hover {
+    opacity: 0.2;
+}
