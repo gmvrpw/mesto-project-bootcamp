@@ -1,32 +1,32 @@
-function isFormValid(form) {
+export function isFormValid(form) {
   return Object.values(form.inputs).reduce((accumulator, input) => accumulator && input.element.validity.valid, true);
 }
 
-function showInputErrorMessage(input, message) {
+export function showInputErrorMessage(input, message) {
   input.error.element.textContent = message;
 
   input.element.classList.add(input.modifiers.invalid);
   input.error.element.classList.remove(input.error.modifiers.hidden);
 }
 
-function hideInputErrorMessage(input) {
+export function hideInputErrorMessage(input) {
   input.error.element.textContent = "";
 
   input.element.classList.remove(input.modifiers.invalid);
   input.error.element.classList.add(input.error.modifiers.hidden);
 }
 
-function enableSubmitButton(submit) {
+export function enableSubmitButton(submit) {
   submit.element.disabled = false;
   submit.element.classList.remove(submit.modifiers.disabled)
 }
 
-function disableSubmitButton(submit) {
+export function disableSubmitButton(submit) {
   submit.element.disabled = true;
   submit.element.classList.add(submit.modifiers.disabled)
 }
 
-function validateInput(input) {
+export function validateInput(input) {
   if (input.element.validity.valid) {
     hideInputErrorMessage(input);
   } else {
@@ -34,7 +34,7 @@ function validateInput(input) {
   }
 }
 
-function validateSubmit(form) {
+export function validateSubmit(form) {
   if (isFormValid(form)) {
     enableSubmitButton(form.submit);
   } else {
@@ -42,12 +42,12 @@ function validateSubmit(form) {
   }
 }
 
-function validateForm(form) {
+export function validateForm(form) {
   Object.values(form.inputs).forEach((input) => validateInput(input));
   validateSubmit(form);
 }
 
-function enableValidation(form) {
+export function enableValidation(form) {
   validateForm(form);
 
   Object.values(form.inputs).forEach((input) => {

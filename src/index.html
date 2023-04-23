@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="pages/index.css" rel="stylesheet">
   <title>Место</title>
 </head>
 <body>
@@ -74,19 +73,19 @@
       <div class="popup__content popup__content_type_image">
         <button type="button" class="popup__close button button_type_close" aria-label="Закрыть"></button>
         <figure class="place">
-          <img src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg" class="place__image">
-          <figcaption class="place__capture">Карачаево-Черкессия</figcaption>
+          <img class="place__image">
+          <figcaption class="place__capture"></figcaption>
         </figure>
       </div>
     </div>
     <div class="page__container">
       <header class="page__header header">
-        <img src="./images/logo.svg" class="header__image" alt='Логотип "Место"'>
+        <img src="<%= require('./images/logo.svg') %>" class="header__image" alt='Логотип "Место"' />
       </header>
       <main class="page__main">
         <section class="top-bar" aria-label="Заголовок профиля">
           <div class="top-bar__profile profile" aria-label="Профиль пользователя Жак-Ив Кусто">
-            <img src="./images/avatar.png" class="profile__avatar" alt="Аватар пользователя Жак-Ив Кусто">
+            <img src="<%= require('./images/avatar.png') %>" class="profile__avatar" alt="Аватар пользователя Жак-Ив Кусто" />
             <div class="profile__text">
               <div class="profile__name-wrapper">
                 <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -115,7 +114,5 @@
       <button type="button" class="card__delete button button_type_delete" aria-label="Удалить"></button>
     </article>
   </template>
-  <script lang="javascript" src="components/validate.js"></script>
-  <script lang="javascript" src="scripts/index.js"></script>
 </body>
 </html>
