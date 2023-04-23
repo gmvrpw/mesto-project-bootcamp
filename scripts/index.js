@@ -5,11 +5,32 @@ function renderToStart(container, ...items) {
 
 function openPopup(popup) {
   popup.classList.remove("popup_hidden");
+  popup.focus();
 }
 
 function closePopup (popup) {
   popup.classList.add("popup_hidden");
 }
+
+document.querySelectorAll(".popup").forEach((popup) => {
+  const closeButton = popup.querySelector(".popup__close");
+
+  popup.addEventListener("keydown", (e) => {
+    if (e.key !== "Escape") {
+      return;
+    }
+    closePopup(popup);
+  })
+  popup.addEventListener("click", (e) => {
+    if (e.target !== popup) {
+      return;
+    }
+    closePopup(popup);
+  });
+  closeButton.addEventListener("click", () => {
+    closePopup(popup);
+  });
+})
 
 document.querySelectorAll(".popup__close").forEach((closeButton) => {
   const associatedPopup = closeButton.closest(".popup");
