@@ -48,6 +48,8 @@ function validateForm(form) {
 }
 
 function enableValidation(form) {
+  validateForm(form);
+
   Object.values(form.inputs).forEach((input) => {
     input.element.addEventListener("input", () => {
       validateInput(input);

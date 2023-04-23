@@ -45,8 +45,26 @@
         <form class="form">
           <h3 class="form__title">Новое место</h3>
           <div class="form__inputs">
-            <input type="text" name="name" class="form__text-input text-input" placeholder="Название" aria-label="Название">
-            <input type="text" name="link" class="form__text-input text-input" placeholder="Ссылка на картинку" aria-label="Ссылка на картинку">
+            <div class="form__text-input-wrapper">
+              <input
+                type="text" name="name"
+                class="form__text-input text-input"
+                placeholder="Название"
+                required minlength="2" maxlength="30"
+                aria-label="Название"
+              >
+              <p id="place-name-input-error" class="form__text-input-error form__text-input-error_hidden"></p>
+            </div>
+            <div class="form__text-input-wrapper">
+              <input
+                type="url" name="link"
+                class="form__text-input text-input"
+                placeholder="Ссылка на картинку"
+                required
+                aria-label="Ссылка на картинку"
+              >
+              <p id="place-link-input-error" class="form__text-input-error form__text-input-error_hidden"></p>
+            </div>
           </div>
           <button type="submit" class="form__submit button button_type_save">Сохранить</button>
         </form>

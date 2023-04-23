@@ -43,12 +43,15 @@ const editProfilePopupNameInput = editProfilePopupForm.elements.name;
 const editProfilePopupNameInputError = editProfilePopupForm.querySelector("#profile-name-input-error");
 const editProfilePopupDescriptionInput = editProfilePopupForm.elements.description;
 const editProfilePopupDescriptionInputError = editProfilePopupForm.querySelector("#profile-description-input-error");
-const editProfilePopupFormSubmitButton = editProfilePopupForm.querySelector(".form__submit");
+const editProfilePopupSubmitButton = editProfilePopupForm.querySelector(".form__submit");
 
 const addPlacePopup = document.querySelector("#add-place-popup");
 const addPlacePopupForm = addPlacePopup.querySelector(".form");
 const addPlacePopupNameInput = addPlacePopupForm.elements.name;
+const addPlacePopupNameInputError = addPlacePopupForm.querySelector("#place-name-input-error");
 const addPlacePopupLinkInput = addPlacePopupForm.elements.link;
+const addPlacePopupLinkInputError = addPlacePopupForm.querySelector("#place-link-input-error");
+const addPlacePopupSubmitButton = addPlacePopupForm.querySelector(".form__submit");
 
 const topBar = document.querySelector(".top-bar");
 const topBarAddButton = topBar.querySelector(".top-bar__add");
@@ -62,7 +65,7 @@ const cards = document.querySelector(".cards");
 const cardTemplate = document.querySelector("#card-template");
 
 // Объекты валидации
-const editProfileValidationObject = {
+const editProfileFormValidationObject = {
   element: editProfilePopupForm,
     inputs: {
   name: {
@@ -91,8 +94,43 @@ const editProfileValidationObject = {
   }
 },
   submit: {
-    element: editProfilePopupFormSubmitButton,
+    element: editProfilePopupSubmitButton,
       modifiers: {
+      disabled: "form__submit_disabled"
+    }
+  }
+}
+const addPlaceFormValidationObject = {
+  element: addPlacePopupForm,
+  inputs: {
+    name: {
+      element: addPlacePopupNameInput,
+      modifiers: {
+        invalid: "form__text-input_invalid"
+      },
+      error: {
+        element: addPlacePopupNameInputError,
+        modifiers: {
+          hidden: "form__text-input-error_hidden"
+        }
+      }
+    },
+    description: {
+      element: addPlacePopupLinkInput,
+      modifiers: {
+        invalid: "form__text-input_invalid"
+      },
+      error: {
+        element: addPlacePopupLinkInputError,
+        modifiers: {
+          hidden: "form__text-input-error_hidden"
+        }
+      }
+    }
+  },
+  submit: {
+    element: addPlacePopupSubmitButton,
+    modifiers: {
       disabled: "form__submit_disabled"
     }
   }
@@ -110,10 +148,15 @@ const setPlaceToPlacePopup = ({name, link}) => {
   placePopupImage.alt = name;
 }
 
+const resetAddPlaceForm = () => {
+  addPlacePopupForm.reset();
+  validateForm(addPlaceFormValidationObject);
+}
+
 const setDefaultValuesToEditProfileForm = ({name, description}) => {
   editProfilePopupNameInput.value = name;
   editProfilePopupDescriptionInput.value = description;
-  validateForm(editProfileValidationObject);
+  validateForm(editProfileFormValidationObject);
 }
 
 const toggleLike = (likeButton) => {
@@ -149,7 +192,7 @@ const createCard = ({name, link}) => {
 
 // Основные слушатели для блоков
 const setupEditProfilePopup = () => {
-  enableValidation(editProfileValidationObject)
+  enableValidation(editProfileFormValidationObject)
   editProfilePopupForm.addEventListener("submit", (e) => {
     setProfile({
       name: editProfilePopupNameInput.value,
@@ -161,12 +204,12 @@ const setupEditProfilePopup = () => {
 }
 
 const setupAddPlacePopup = () => {
+  enableValidation(addPlaceFormValidationObject);
   addPlacePopupForm.addEventListener("submit", (e) => {
     renderToStart(cards, createCard({
       name: addPlacePopupNameInput.value,
       link: addPlacePopupLinkInput.value
     }))
-    addPlacePopupForm.reset();
     closePopup(addPlacePopup);
     e.preventDefault();
   })
@@ -184,6 +227,7 @@ const setupProfile = () => {
 
 const setupTopBar = () => {
   topBarAddButton.addEventListener("click", () => {
+    resetAddPlaceForm();
     openPopup(addPlacePopup);
   })
 }
