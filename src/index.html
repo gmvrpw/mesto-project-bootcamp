@@ -10,28 +10,30 @@
     <div id="edit-profile-popup" class="popup popup_hidden">
       <div class="popup__content">
         <button type="button" class="popup__close button button_type_close" aria-label="Закрыть"></button>
-        <form class="form" novalidate>
+        <form name="edit-profile" class="form" novalidate>
           <h3 class="form__title">Редактировать профиль</h3>
           <div class="form__inputs">
             <div class="form__text-input-wrapper">
               <input
+                id="profile-name-input"
                 type="text" name="name"
                 class="form__text-input text-input"
                 placeholder="Имя пользователя"
                 required minlength="2" maxlength="40"
                 aria-label="Имя пользователя"
               >
-              <p id="profile-name-input-error" class="form__text-input-error form__text-input-error_hidden"></p>
+              <p class="profile-name-input-error form__text-input-error"></p>
             </div>
             <div class="form__text-input-wrapper">
               <input
+                id="profile-description-input"
                 type="text" name="description"
                 class="form__text-input text-input"
                 placeholder="Описание"
                 required minlength="2" maxlength="200"
                 aria-label="Описание"
               >
-              <p id="profile-description-input-error" class="form__text-input-error form__text-input-error_hidden"></p>
+              <p class="profile-description-input-error form__text-input-error"></p>
             </div>
           </div>
           <button type="submit" class="form__submit button button_type_save">Сохранить</button>
@@ -41,28 +43,30 @@
     <div id="add-place-popup" class="popup popup_hidden">
       <div class="popup__content">
         <button type="button" class="popup__close button button_type_close" aria-label="Закрыть"></button>
-        <form class="form">
+        <form name="add-place" class="form">
           <h3 class="form__title">Новое место</h3>
           <div class="form__inputs">
             <div class="form__text-input-wrapper">
               <input
+                id="place-name-input"
                 type="text" name="name"
                 class="form__text-input text-input"
                 placeholder="Название"
                 required minlength="2" maxlength="30"
                 aria-label="Название"
               >
-              <p id="place-name-input-error" class="form__text-input-error form__text-input-error_hidden"></p>
+              <p class="place-name-input-error form__text-input-error"></p>
             </div>
             <div class="form__text-input-wrapper">
               <input
+                id="place-link-input"
                 type="url" name="link"
                 class="form__text-input text-input"
                 placeholder="Ссылка на картинку"
                 required
                 aria-label="Ссылка на картинку"
               >
-              <p id="place-link-input-error" class="form__text-input-error form__text-input-error_hidden"></p>
+              <p class="place-link-input-error form__text-input-error"></p>
             </div>
           </div>
           <button type="submit" class="form__submit button button_type_save">Сохранить</button>

@@ -46,7 +46,7 @@
 @import "../blocks/form/__text-input/form__text-input.css";
 @import "../blocks/form/__text-input/_invalid/form__text-input_invalid.css";
 @import "../blocks/form/__text-input-error/form__text-input-error.css";
-@import "../blocks/form/__text-input-error/_hidden/form__text-input-error_hidden.css";
+@import "../blocks/form/__text-input-error/_shown/form__text-input-error_shown.css";
 @import "../blocks/form/__submit/form__submit.css";
 @import "../blocks/form/__submit/_disabled/form__submit_disabled.css";
 @import "../blocks/place/place.css";

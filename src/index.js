@@ -1,6 +1,6 @@
 import "./pages/index.css"
 import { renderToStart } from "./components/render";
-import { enableValidation } from "./components/validation";
+import enableValidation from "./components/validation";
 import addPlaceFormValidation from "./components/validation/addPlaceForm";
 import editProfileFormValidation from "./components/validation/editProfileForm";
 import { openPopup, closePopup } from "./components/modal";

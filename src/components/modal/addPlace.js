@@ -15,5 +15,4 @@ export const getPlaceFromAddPlacePopup = () => {
 
 export const resetAddPlaceForm = () => {
   addPlacePopupForm.reset();
-  validateForm(addPlaceFormValidation);
 }

@@ -1,62 +1,67 @@
-export function isFormValid(form) {
-  return Object.values(form.inputs).reduce((accumulator, input) => accumulator && input.element.validity.valid, true);
+const showError = (inputElement, formElement, errorMessage, {inputErrorClass, errorClass}) => {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  errorElement.textContent = errorMessage;
+  inputElement.classList.add(inputErrorClass);
+  errorElement.classList.add(errorClass);
 }
 
-export function showInputErrorMessage(input, message) {
-  input.error.element.textContent = message;
-
-  input.element.classList.add(input.modifiers.invalid);
-  input.error.element.classList.remove(input.error.modifiers.hidden);
+const hideError = (inputElement, formElement, {inputErrorClass, errorClass}) => {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  errorElement.textContent = '';
+  inputElement.classList.remove(inputErrorClass);
+  errorElement.classList.remove(errorClass);
 }
 
-export function hideInputErrorMessage(input) {
-  input.error.element.textContent = "";
-
-  input.element.classList.remove(input.modifiers.invalid);
-  input.error.element.classList.add(input.error.modifiers.hidden);
+const getErrorMessage = (inputElement) => {
+  return inputElement.validationMessage;
 }
 
-export function enableSubmitButton(submit) {
-  submit.element.disabled = false;
-  submit.element.classList.remove(submit.modifiers.disabled)
-}
-
-export function disableSubmitButton(submit) {
-  submit.element.disabled = true;
-  submit.element.classList.add(submit.modifiers.disabled)
-}
-
-export function validateInput(input) {
-  if (input.element.validity.valid) {
-    hideInputErrorMessage(input);
+export const validateInput = (inputElement, formElement, other) => {
+  if(!inputElement.validity.valid) {
+    showError(inputElement, formElement, getErrorMessage(inputElement), other);
   } else {
-    showInputErrorMessage(input, input.element.validationMessage);
+    hideError(inputElement, formElement, other);
   }
 }
 
-export function validateSubmit(form) {
-  if (isFormValid(form)) {
-    enableSubmitButton(form.submit);
+const hasInvalidInput = (inputList) => {
+  return inputList.some((inputElement) => {
+    return !inputElement.validity.valid;
+  });
+};
+
+export const validateSubmit = (submitButton, inputList, inactiveButtonClass) => {
+  if (hasInvalidInput(inputList)) {
+    submitButton.classList.add(inactiveButtonClass);
+    submitButton.disabled = true;
   } else {
-    disableSubmitButton(form.submit);
+    submitButton.classList.remove(inactiveButtonClass);
+    submitButton.disabled = false;
   }
 }
 
-export function validateForm(form) {
-  Object.values(form.inputs).forEach((input) => validateInput(input));
-  validateSubmit(form);
-}
+const setEventListeners = (formElement, {inputSelector, submitButtonSelector, inactiveButtonClass, ...others}) => {
+  const inputList = Array.from(formElement.querySelectorAll(inputSelector));
+  const submitButton = formElement.querySelector(submitButtonSelector);
 
-export function enableValidation(form) {
-  validateForm(form);
-
-  Object.values(form.inputs).forEach((input) => {
-    input.element.addEventListener("input", () => {
-      validateInput(input);
-    })
+  formElement.addEventListener("reset", () => {
+    inputList.forEach((inputElement) => {
+      hideError(inputElement, formElement, others);
+    });
+    validateSubmit(submitButton, inputList, inactiveButtonClass);
   })
 
-  form.element.addEventListener("input", () => {
-    validateSubmit(form);
-  })
-}
+  inputList.forEach((inputElement) => {
+    inputElement.addEventListener('input', () => {
+      validateInput(inputElement, formElement, others);
+      validateSubmit(submitButton, inputList, inactiveButtonClass);
+    });
+  });
+};
+
+const enableValidation = ({ formSelector, ...others }) => {
+  const formList = Array.from(document.querySelectorAll(formSelector));
+  formList.forEach((formElement) => setEventListeners(formElement, others));
+};
+
+export default enableValidation
