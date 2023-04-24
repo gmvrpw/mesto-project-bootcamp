@@ -13,13 +13,6 @@ export function setupPopups() {
   document.querySelectorAll(".popup").forEach((popup) => {
     const closeButton = popup.querySelector(".popup__close");
 
-    popup.addEventListener("keydown", (e) => {
-      if (e.key !== "Escape") {
-        return;
-      }
-      closePopup(popup);
-    })
-
     popup.addEventListener("click", (e) => {
       if (e.target !== popup) {
         return;
