@@ -1,6 +1,6 @@
 import "./pages/index.css"
 import { renderToStart } from "./components/render";
-import { enableValidation } from "./components/validation";
+import enableValidation from "./components/validation";
 import addPlaceFormValidation from "./components/validation/addPlaceForm";
 import editProfileFormValidation from "./components/validation/editProfileForm";
 import { openPopup, closePopup } from "./components/modal";
@@ -12,13 +12,6 @@ import { getPlaceFromAddPlacePopup, resetAddPlaceForm } from "./components/modal
 export function setupPopups() {
   document.querySelectorAll(".popup").forEach((popup) => {
     const closeButton = popup.querySelector(".popup__close");
-
-    popup.addEventListener("keydown", (e) => {
-      if (e.key !== "Escape") {
-        return;
-      }
-      closePopup(popup);
-    })
 
     popup.addEventListener("click", (e) => {
       if (e.target !== popup) {

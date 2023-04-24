@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     height: 14px;
-    visibility: visible;
+    visibility: hidden;
     line-height: 14px;
     font-size: calc(1px * var(--fs-s));
     color: var(--clr-negative);
