@@ -3,7 +3,17 @@ import { request } from "./net";
 const profileElement = document.querySelector(".profile");
 const profileAvatar = profileElement.querySelector(".profile__avatar");
 const profileName = profileElement.querySelector(".profile__name");
-const profileDescription = profileElement.querySelector(".profile__description");
+const profileAbout = profileElement.querySelector(".profile__about");
+
+export const setProfile = (profile, sync) => {
+  if (sync) {
+    profile = uploadProfile(profile);
+  }
+
+  if (profile.avatar) profileAvatar.src = profile.avatar;
+  if (profile.about) profileAbout.textContent = profile.about;
+  if (profile.name) profileName.textContent = profile.name;
+}
 
 export const setProfileAvatar = (url, sync = true) => {
   if (sync) {
@@ -12,21 +22,11 @@ export const setProfileAvatar = (url, sync = true) => {
   profileAvatar.src = url;
 }
 
-export const setProfile = (profile, sync = true) => {
-  if (sync) {
-    profile = uploadProfile({
-      name,
-      about: profile.description
-    })
-  }
-  profileName.textContent = profile.name;
-  profileDescription.textContent = profile.description;
-}
-
 export const getProfile = () => {
   return {
+    avatar: profileAvatar.src,
     name: profileName.textContent,
-    description: profileDescription.textContent
+    about: profileAbout.textContent
   }
 }
 
@@ -39,7 +39,7 @@ export const loadProfile = async () => {
   const {name, about, avatar} = await res.json();
 
   setProfileAvatar(avatar);
-  setProfile({name, description: about});
+  setProfile({name, about});
 }
 
 export const uploadProfile = async (profile) => {

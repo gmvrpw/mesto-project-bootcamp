@@ -23,7 +23,7 @@
 @import "../blocks/profile/__text/profile__text.css";
 @import "../blocks/profile/__name-wrapper/profile__name-wrapper.css";
 @import "../blocks/profile/__name/profile__name.css";
-@import "../blocks/profile/__description/profile__description.css";
+@import "../blocks/profile/__about/profile__about.css";
 @import "../blocks/profile/__edit/profile__edit.css";
 @import "../blocks/cards/cards.css";
 @import "../blocks/card/card.css";
