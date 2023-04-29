@@ -15,13 +15,6 @@ export const setProfile = (profile, sync) => {
   if (profile.name) profileName.textContent = profile.name;
 }
 
-export const setProfileAvatar = (url, sync = true) => {
-  if (sync) {
-    url = uploadProfile({avatar: url}).url;
-  }
-  profileAvatar.src = url;
-}
-
 export const getProfile = () => {
   return {
     avatar: profileAvatar.src,
@@ -36,10 +29,7 @@ export const loadProfile = async () => {
     path: "/users/me",
   })
 
-  const {name, about, avatar} = await res.json();
-
-  setProfileAvatar(avatar);
-  setProfile({name, about});
+  setProfile(await res.json());
 }
 
 export const uploadProfile = async (profile) => {
