@@ -110,10 +110,13 @@
   </div>
   <template id="card-template">
     <article class="card">
-      <img class="card__image" src="images/dombay.jpg" alt="Домбай">
+      <img class="card__image">
       <div class="card__about">
-        <h2 class="card__name">Домбай</h2>
-        <button type="button" class="card__like button button_type_like" aria-label="Нравится"></button>
+        <h2 class="card__name"></h2>
+        <div class="card__like-wrapper">
+          <button type="button" class="card__like button button_type_like" aria-label="Нравится"></button>
+          <p class="card__like-counter">0</p>
+        </div>
       </div>
       <button type="button" class="card__delete button button_type_delete" aria-label="Удалить"></button>
     </article>
