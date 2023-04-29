@@ -59,7 +59,17 @@ const setEventListeners = (formElement, {inputSelector, submitButtonSelector, in
   });
 };
 
-const enableValidation = ({ formSelector, ...others }) => {
+export const validationObject = {
+  formSelector: '.form',
+  inputSelector: '.form__text-input',
+  submitButtonSelector: '.form__submit',
+  inactiveButtonClass: 'form__submit_disabled',
+  inputErrorClass: 'form__text-input_invalid',
+  errorClass: 'form__text-input-error_shown'
+}
+
+const enableValidation = () => {
+  const { formSelector, ...others } = validationObject;
   const formList = Array.from(document.querySelectorAll(formSelector));
   formList.forEach((formElement) => setEventListeners(formElement, others));
 };

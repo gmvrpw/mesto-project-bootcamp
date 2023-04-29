@@ -1,5 +1,4 @@
-import {validateInput, validateSubmit} from "../validation";
-import editProfileFormValidation from "../validation/editProfileForm";
+import {validateInput, validateSubmit, validationObject} from "../validation";
 
 const editProfilePopup = document.querySelector("#edit-profile-popup");
 const editProfilePopupForm = editProfilePopup.querySelector(".form");
@@ -9,13 +8,13 @@ const editProfilePopupSubmitButton = editProfilePopupForm.querySelector(".form__
 
 export const setProfileToEditProfileForm = ({name, about}) => {
   editProfilePopupNameInput.value = name;
-  validateInput(editProfilePopupNameInput, editProfilePopupForm, editProfileFormValidation);
+  validateInput(editProfilePopupNameInput, editProfilePopupForm, validationObject);
   editProfilePopupAboutInput.value = about;
-  validateInput(editProfilePopupAboutInput, editProfilePopupForm, editProfileFormValidation);
+  validateInput(editProfilePopupAboutInput, editProfilePopupForm, validationObject);
   validateSubmit(
     editProfilePopupSubmitButton,
     [editProfilePopupNameInput, editProfilePopupAboutInput],
-    editProfileFormValidation.inactiveButtonClass
+    validationObject.inactiveButtonClass
   )
 }
 
