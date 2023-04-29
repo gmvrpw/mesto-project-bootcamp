@@ -1,4 +1,4 @@
-export class Api {
+class Api {
   static token = process.env.TOKEN
   static cohort = process.env.GROUP_ID
   static myId;
@@ -74,3 +74,5 @@ export class Api {
     })
   }
 }
+
+export default Api;
