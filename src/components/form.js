@@ -1,7 +1,7 @@
 export const submitLoading = (submitButton) => {
   const submitButtonText = submitButton.textContent;
 
-  submitButton.textContent = "Сохраенние..."
+  submitButton.textContent = "Сохранение..."
 
   return () => {
     submitButton.textContent = submitButtonText;
