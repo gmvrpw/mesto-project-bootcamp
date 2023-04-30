@@ -5,8 +5,10 @@
     --clr-ntrl-dk: #545454;
     --clr-ntrl-dkr: #000000;
     --clr-ntrl-dk-70: rgba(84, 84, 84, 0.7);
+    --clr-ntrl-dkr-80: rgba(0, 0, 0, 0.8);
     --clr-ntrl-dkr-50: rgba(0, 0, 0, 0.5);
     --clr-ntrl-dkr-20: rgba(0, 0, 0, 0.2);
+    --clr-ntrl-dkr-0: rgba(0, 0, 0, 0);
 
     --clr-negative: #ff0000;
 

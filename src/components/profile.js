@@ -1,15 +1,18 @@
-const profile = document.querySelector(".profile");
-const profileName = profile.querySelector(".profile__name");
-const profileDescription = profile.querySelector(".profile__description");
+const profileElement = document.querySelector(".profile");
+const profileAvatar = profileElement.querySelector(".profile__avatar");
+const profileName = profileElement.querySelector(".profile__name");
+const profileAbout = profileElement.querySelector(".profile__about");
 
-export const setProfile = ({name, description}) => {
-  profileName.textContent = name;
-  profileDescription.textContent = description;
+export const setProfile = (profile) => {
+  if (profile.avatar) profileAvatar.src = profile.avatar;
+  if (profile.about) profileAbout.textContent = profile.about;
+  if (profile.name) profileName.textContent = profile.name;
 }
 
 export const getProfile = () => {
   return {
+    avatar: profileAvatar.src,
     name: profileName.textContent,
-    description: profileDescription.textContent
+    about: profileAbout.textContent
   }
 }
