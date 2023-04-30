@@ -7,6 +7,28 @@
 </head>
 <body>
   <div class="page">
+    <div id="edit-profile-avatar-popup" class="popup popup_hidden">
+      <div class="popup__content">
+        <button type="button" class="popup__close button button_type_close" aria-label="Закрыть"></button>
+        <form name="edit-profile-avatar" class="form" novalidate>
+          <h3 class="form__title">Обновить аватар</h3>
+          <div class="form__inputs">
+            <div class="form__text-input-wrapper">
+              <input
+                id="profile-avatar-input"
+                type="url" name="link"
+                class="form__text-input text-input"
+                placeholder="Ссылка на аватар"
+                required minlength="2" maxlength="40"
+                aria-label="Аватар пользователя"
+              >
+              <p class="profile-avatar-input-error form__text-input-error"></p>
+            </div>
+          </div>
+          <button type="submit" class="form__submit button button_type_save">Сохранить</button>
+        </form>
+      </div>
+    </div>
     <div id="edit-profile-popup" class="popup popup_hidden">
       <div class="popup__content">
         <button type="button" class="popup__close button button_type_close" aria-label="Закрыть"></button>
@@ -43,7 +65,7 @@
     <div id="add-place-popup" class="popup popup_hidden">
       <div class="popup__content">
         <button type="button" class="popup__close button button_type_close" aria-label="Закрыть"></button>
-        <form name="add-place" class="form">
+        <form name="add-place" class="form" novalidate>
           <h3 class="form__title">Новое место</h3>
           <div class="form__inputs">
             <div class="form__text-input-wrapper">
@@ -89,7 +111,10 @@
       <main class="page__main">
         <section class="top-bar" aria-label="Заголовок профиля">
           <div class="top-bar__profile profile" aria-label="Профиль пользователя Жак-Ив Кусто">
-            <img src="<%= require('./images/avatar.png') %>" class="profile__avatar" alt="Аватар пользователя Жак-Ив Кусто" />
+            <div class="profile__avatar-wrapper">
+              <button class="profile__avatar-edit"></button>
+              <img src="<%= require('./images/avatar.png') %>" class="profile__avatar" alt="Аватар пользователя Жак-Ив Кусто" />
+            </div>
             <div class="profile__text">
               <div class="profile__name-wrapper">
                 <h1 class="profile__name">Жак-Ив Кусто</h1>

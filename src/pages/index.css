@@ -19,7 +19,9 @@
 @import "../blocks/top-bar/__profile/top-bar__profile.css";
 @import "../blocks/top-bar/__add/top-bar__add.css";
 @import "../blocks/profile/profile.css";
+@import "../blocks/profile/__avatar-wrapper/profile__avatar-wrapper.css";
 @import "../blocks/profile/__avatar/profile__avatar.css";
+@import "../blocks/profile/__avatar-edit/profile__avatar-edit.css";
 @import "../blocks/profile/__text/profile__text.css";
 @import "../blocks/profile/__name-wrapper/profile__name-wrapper.css";
 @import "../blocks/profile/__name/profile__name.css";
