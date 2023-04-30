@@ -1,13 +1,17 @@
 import "./pages/index.css"
 import { renderToStart } from "./components/render";
+import Api from "./components/api";
 import enableValidation from "./components/validation";
-import addPlaceFormValidation from "./components/validation/addPlaceForm";
-import editProfileFormValidation from "./components/validation/editProfileForm";
 import { openPopup, closePopup } from "./components/modal";
 import { getProfile, setProfile } from "./components/profile";
 import { createCard } from "./components/card";
 import { getProfileFromEditProfileForm, setProfileToEditProfileForm } from "./components/modal/editProfile";
 import { getPlaceFromAddPlacePopup, resetAddPlaceForm } from "./components/modal/addPlace";
+import {submitLoading} from "./components/form";
+import {
+  getProfileAvatarFromEditProfileAvatarForm,
+  resetEditProfileAvatarForm
+} from "./components/modal/editProfileAvatar";
 
 export function setupPopups() {
   document.querySelectorAll(".popup").forEach((popup) => {
@@ -29,6 +33,9 @@ export function setupPopups() {
 const editProfilePopup = document.querySelector("#edit-profile-popup");
 const editProfilePopupForm = editProfilePopup.querySelector(".form");
 
+const editProfileAvatarPopup = document.querySelector("#edit-profile-avatar-popup");
+const editProfileAvatarPopupForm = editProfileAvatarPopup.querySelector(".form");
+
 const addPlacePopup = document.querySelector("#add-place-popup");
 const addPlacePopupForm = addPlacePopup.querySelector(".form");
 
@@ -37,32 +44,71 @@ const topBarAddButton = topBar.querySelector(".top-bar__add");
 
 const profile = document.querySelector(".profile");
 const profileEditButton = profile.querySelector(".profile__edit");
+const profileEditAvatarButton = profile.querySelector(".profile__avatar-edit");
 
 const cards = document.querySelector(".cards");
 
 const setupEditProfilePopup = () => {
-  enableValidation(editProfileFormValidation)
+  const editProfilePopupFormSubmitButton = editProfilePopupForm.querySelector(".form__submit");
+
   editProfilePopupForm.addEventListener("submit", (e) => {
-    setProfile(getProfileFromEditProfileForm());
-    closePopup(editProfilePopup);
+    const submitLoaded = submitLoading(editProfilePopupFormSubmitButton);
+
+    Api.setMe(getProfileFromEditProfileForm()).then(
+      (profile) => {
+        setProfile(profile);
+        closePopup(editProfilePopup);
+        submitLoaded();
+      });
+
+    e.preventDefault();
+  })
+}
+
+const setupEditProfileAvatarPopup = () => {
+  const editProfileAvatarPopupFormSubmitButton = editProfileAvatarPopupForm.querySelector(".form__submit");
+
+  editProfileAvatarPopupForm.addEventListener("submit", (e) => {
+    const submitLoaded = submitLoading(editProfileAvatarPopupFormSubmitButton);
+
+    Api.setMyAvatar(getProfileAvatarFromEditProfileAvatarForm()).then(
+      (profile) => {
+        setProfile(profile);
+        closePopup(editProfileAvatarPopup);
+        submitLoaded();
+      });
+
     e.preventDefault();
   })
 }
 
 const setupAddPlacePopup = () => {
-  enableValidation(addPlaceFormValidation);
-  addPlacePopupForm.addEventListener("submit", (e) => {
-    renderToStart(cards, createCard(getPlaceFromAddPlacePopup()));
-    closePopup(addPlacePopup);
+  const addPlaceFormSubmitButton = addPlacePopupForm.querySelector(".form__submit");
+
+  addPlacePopupForm.addEventListener("submit", async (e) => {
+    const submitLoaded = submitLoading(addPlaceFormSubmitButton);
+
+    Api.createCard(getPlaceFromAddPlacePopup())
+      .then((card) => {
+        renderToStart(cards, createCard(card));
+        closePopup(addPlacePopup);
+        submitLoaded();
+      })
+
     e.preventDefault();
   })
 }
 
-const setupProfile = () => {
+const setupProfile = async () => {
+  setProfile(await Api.me());
   profileEditButton.addEventListener("click", () => {
     setProfileToEditProfileForm(getProfile());
     openPopup(editProfilePopup);
-  })
+  });
+  profileEditAvatarButton.addEventListener("click", () => {
+    resetEditProfileAvatarForm();
+    openPopup(editProfileAvatarPopup)
+  });
 }
 
 const setupTopBar = () => {
@@ -72,38 +118,24 @@ const setupTopBar = () => {
   })
 }
 
-const initialPlaces = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
+const setupCards = async () => {
+  renderToStart(cards, ...await Api.getCards());
+}
 
-setupPopups();
+document.addEventListener("DOMContentLoaded", async () => {
+  // Необходимо синхронное выполнение, т.к. другие методы обращаются к полям Api
+  await Api.authorize();
 
-setupTopBar();
-setupProfile();
-setupAddPlacePopup();
-setupEditProfilePopup();
+  enableValidation();
 
-renderToStart(cards, ...initialPlaces.map((placeData) => createCard(placeData)))
+  setupPopups();
+
+  setupTopBar();
+  setupProfile();
+  setupAddPlacePopup();
+  setupEditProfilePopup();
+  setupEditProfileAvatarPopup();
+
+  setupCards();
+
+})
