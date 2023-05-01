@@ -17,7 +17,7 @@ export const showDeleteButton = (cardDeleteButton) => {
   cardDeleteButton.classList.remove("card__delete_hidden");
 }
 
-export const createCard = async (card) => {
+export const createCard = (card) => {
   const cardElement = cardTemplate.content.querySelector(".card").cloneNode(true);
 
   // Элементы
@@ -28,21 +28,24 @@ export const createCard = async (card) => {
   const cardDeleteButton = cardElement.querySelector(".card__delete")
 
   // Данные
-  cardElement.dataset.id = card._id;
-  cardImage.src = card.link;
-  cardImage.alt = card.name;
-  cardName.textContent = card.name;
-  cardLikeCounter.textContent = card.likes.length;
-  if (card.likes.includes(Api.myId)) likeCard(cardLikeButton);
-  if (card.owner._id === Api.myId) showDeleteButton(cardDeleteButton);
+  function updateCard(card) {
+    cardElement.dataset.id = card._id;
+    cardImage.src = card.link;
+    cardImage.alt = card.name;
+    cardName.textContent = card.name;
+    cardLikeCounter.textContent = card.likes.length;
+    if (card.likes.map(like => like._id).includes(Api.myId)) likeCard(cardLikeButton);
+    if (card.owner._id === Api.myId) showDeleteButton(cardDeleteButton);
+  }
+  updateCard(card);
 
   // События
-  cardLikeButton.addEventListener("click", async () => {
+  cardLikeButton.addEventListener("click", () => {
     if (cardLikeButton.classList.contains("card__like_liked")) {
-      await Api.dislikeCard(card._id);
+      Api.dislikeCard(card._id).then(updateCard); // промис, т.к. анимация постановки/снятия лайка важнее чем точная цифра
       dislikeCard(cardLikeButton);
     } else {
-      await Api.likeCard(card._id);
+      Api.likeCard(card._id).then(updateCard); // аналогично
       likeCard(cardLikeButton);
     }
   })
