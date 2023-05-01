@@ -17,7 +17,7 @@ class Api {
   }
 
   static async authorize() {
-    Api.myId = await this.me()._id;
+    Api.myId = (await this.me())._id;
   }
 
   static async me() {

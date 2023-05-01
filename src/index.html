@@ -19,7 +19,7 @@
                 type="url" name="link"
                 class="form__text-input text-input"
                 placeholder="Ссылка на аватар"
-                required minlength="2" maxlength="40"
+                required
                 aria-label="Аватар пользователя"
               >
               <p class="profile-avatar-input-error form__text-input-error"></p>
@@ -113,14 +113,14 @@
           <div class="top-bar__profile profile" aria-label="Профиль пользователя Жак-Ив Кусто">
             <div class="profile__avatar-wrapper">
               <button class="profile__avatar-edit"></button>
-              <img src="<%= require('./images/avatar.png') %>" class="profile__avatar" alt="Аватар пользователя Жак-Ив Кусто" />
+              <img src="" class="profile__avatar" alt="Аватар пользователя" />
             </div>
             <div class="profile__text">
               <div class="profile__name-wrapper">
-                <h1 class="profile__name">Жак-Ив Кусто</h1>
+                <h1 class="profile__name"></h1>
                 <button type="button" class="profile__edit button button_type_edit"></button>
               </div>
-              <p class="profile__about">Исследователь океана</p>
+              <p class="profile__about"></p>
             </div>
           </div>
           <button type="button" class="top-bar__add button button_type_add" aria-label="Изменить профиль"></button>

@@ -119,7 +119,7 @@ const setupTopBar = () => {
 }
 
 const setupCards = async () => {
-  renderToStart(cards, ...await Api.getCards());
+  renderToStart(cards, ...(await Api.getCards()).map(card => createCard(card)));
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
