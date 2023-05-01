@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Место</title>
+<script defer src="main.js"></script><link href="main.css" rel="stylesheet"></head>
+<body>
+  <div class="page">
+    <div id="edit-profile-avatar-popup" class="popup popup_hidden">
+      <div class="popup__content">
+        <button type="button" class="popup__close button button_type_close" aria-label="Закрыть"></button>
+        <form name="edit-profile-avatar" class="form" novalidate>
+          <h3 class="form__title">Обновить аватар</h3>
+          <div class="form__inputs">
+            <div class="form__text-input-wrapper">
+              <input
+                id="profile-avatar-input"
+                type="url" name="link"
+                class="form__text-input text-input"
+                placeholder="Ссылка на аватар"
+                required
+                aria-label="Аватар пользователя"
+              >
+              <p class="profile-avatar-input-error form__text-input-error"></p>
+            </div>
+          </div>
+          <button type="submit" class="form__submit button button_type_save">Сохранить</button>
+        </form>
+      </div>
+    </div>
+    <div id="edit-profile-popup" class="popup popup_hidden">
+      <div class="popup__content">
+        <button type="button" class="popup__close button button_type_close" aria-label="Закрыть"></button>
+        <form name="edit-profile" class="form" novalidate>
+          <h3 class="form__title">Редактировать профиль</h3>
+          <div class="form__inputs">
+            <div class="form__text-input-wrapper">
+              <input
+                id="profile-name-input"
+                type="text" name="name"
+                class="form__text-input text-input"
+                placeholder="Имя пользователя"
+                required minlength="2" maxlength="40"
+                aria-label="Имя пользователя"
+              >
+              <p class="profile-name-input-error form__text-input-error"></p>
+            </div>
+            <div class="form__text-input-wrapper">
+              <input
+                id="profile-about-input"
+                type="text" name="about"
+                class="form__text-input text-input"
+                placeholder="Описание"
+                required minlength="2" maxlength="200"
+                aria-label="Описание"
+              >
+              <p class="profile-about-input-error form__text-input-error"></p>
+            </div>
+          </div>
+          <button type="submit" class="form__submit button button_type_save">Сохранить</button>
+        </form>
+      </div>
+    </div>
+    <div id="add-place-popup" class="popup popup_hidden">
+      <div class="popup__content">
+        <button type="button" class="popup__close button button_type_close" aria-label="Закрыть"></button>
+        <form name="add-place" class="form" novalidate>
+          <h3 class="form__title">Новое место</h3>
+          <div class="form__inputs">
+            <div class="form__text-input-wrapper">
+              <input
+                id="place-name-input"
+                type="text" name="name"
+                class="form__text-input text-input"
+                placeholder="Название"
+                required minlength="2" maxlength="30"
+                aria-label="Название"
+              >
+              <p class="place-name-input-error form__text-input-error"></p>
+            </div>
+            <div class="form__text-input-wrapper">
+              <input
+                id="place-link-input"
+                type="url" name="link"
+                class="form__text-input text-input"
+                placeholder="Ссылка на картинку"
+                required
+                aria-label="Ссылка на картинку"
+              >
+              <p class="place-link-input-error form__text-input-error"></p>
+            </div>
+          </div>
+          <button type="submit" class="form__submit button button_type_save">Сохранить</button>
+        </form>
+      </div>
+    </div>
+    <div id="place-popup" class="popup popup_hidden">
+      <div class="popup__content popup__content_type_image">
+        <button type="button" class="popup__close button button_type_close" aria-label="Закрыть"></button>
+        <figure class="place">
+          <img class="place__image">
+          <figcaption class="place__capture"></figcaption>
+        </figure>
+      </div>
+    </div>
+    <div class="page__container">
+      <header class="page__header header">
+        <img src="593ae7c208470b8646ee.svg" class="header__image" alt='Логотип "Место"' />
+      </header>
+      <main class="page__main">
+        <section class="top-bar" aria-label="Заголовок профиля">
+          <div class="top-bar__profile profile" aria-label="Профиль пользователя Жак-Ив Кусто">
+            <div class="profile__avatar-wrapper">
+              <button class="profile__avatar-edit"></button>
+              <img src="" class="profile__avatar" alt="Аватар пользователя" />
+            </div>
+            <div class="profile__text">
+              <div class="profile__name-wrapper">
+                <h1 class="profile__name"></h1>
+                <button type="button" class="profile__edit button button_type_edit"></button>
+              </div>
+              <p class="profile__about"></p>
+            </div>
+          </div>
+          <button type="button" class="top-bar__add button button_type_add" aria-label="Изменить профиль"></button>
+        </section>
+        <section class="cards" aria-label="Карточки пользователя">
+        </section>
+      </main>
+      <footer class="page__footer footer">
+        <p class="footer__text">&copy; 2020 Mesto Russia</p>
+      </footer>
+    </div>
+  </div>
+  <template id="card-template">
+    <article class="card">
+      <img class="card__image">
+      <div class="card__about">
+        <h2 class="card__name"></h2>
+        <div class="card__like-wrapper">
+          <button type="button" class="card__like button button_type_like" aria-label="Нравится"></button>
+          <p class="card__like-counter">0</p>
+        </div>
+      </div>
+      <button type="button" class="card__delete card__delete_hidden button button_type_delete" aria-label="Удалить"></button>
+    </article>
+  </template>
+</body>
+</html>
