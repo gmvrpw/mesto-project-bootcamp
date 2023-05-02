@@ -1,12 +1,12 @@
 import "./pages/index.css"
-import { renderToStart } from "./components/render";
+import {renderToStart} from "./components/render";
 import Api from "./components/api";
 import enableValidation from "./components/validation";
-import { openPopup, closePopup } from "./components/modal";
-import { getProfile, setProfile } from "./components/profile";
-import { createCard } from "./components/card";
-import { getProfileFromEditProfileForm, setProfileToEditProfileForm } from "./components/modal/editProfile";
-import { getPlaceFromAddPlacePopup, resetAddPlaceForm } from "./components/modal/addPlace";
+import {closePopup, openPopup} from "./components/modal";
+import {getProfile, setProfile} from "./components/profile";
+import {createCard} from "./components/card";
+import {getProfileFromEditProfileForm, setProfileToEditProfileForm} from "./components/modal/editProfile";
+import {getPlaceFromAddPlacePopup, resetAddPlaceForm} from "./components/modal/addPlace";
 import {submitLoading} from "./components/form";
 import {
   getProfileAvatarFromEditProfileAvatarForm,
@@ -46,7 +46,7 @@ const profile = document.querySelector(".profile");
 const profileEditButton = profile.querySelector(".profile__edit");
 const profileEditAvatarButton = profile.querySelector(".profile__avatar-edit");
 
-const cards = document.querySelector(".cards");
+const cardsContainer = document.querySelector(".cards");
 
 const setupEditProfilePopup = () => {
   const editProfilePopupFormSubmitButton = editProfilePopupForm.querySelector(".form__submit");
@@ -54,12 +54,15 @@ const setupEditProfilePopup = () => {
   editProfilePopupForm.addEventListener("submit", (e) => {
     const submitLoaded = submitLoading(editProfilePopupFormSubmitButton);
 
-    Api.setMe(getProfileFromEditProfileForm()).then(
-      (profile) => {
-        setProfile(profile);
-        closePopup(editProfilePopup);
-        submitLoaded();
-      });
+    Api.setMe(getProfileFromEditProfileForm()).then((profile) => {
+      if (profile.status !== 200) new Error(JSON.stringify(profile))
+      setProfile(profile);
+      closePopup(editProfilePopup);
+    }).catch((error) => {
+      console.log(error);
+    }).finally(() => {
+      submitLoaded();
+    });
 
     e.preventDefault();
   })
@@ -71,10 +74,16 @@ const setupEditProfileAvatarPopup = () => {
   editProfileAvatarPopupForm.addEventListener("submit", (e) => {
     const submitLoaded = submitLoading(editProfileAvatarPopupFormSubmitButton);
 
-    Api.setMyAvatar(getProfileAvatarFromEditProfileAvatarForm()).then(
-      (profile) => {
+    Api.setMyAvatar(getProfileAvatarFromEditProfileAvatarForm())
+      .then((profile) => {
+        if (profile.status !== 200) new Error(JSON.stringify(profile))
         setProfile(profile);
         closePopup(editProfileAvatarPopup);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
         submitLoaded();
       });
 
@@ -90,8 +99,14 @@ const setupAddPlacePopup = () => {
 
     Api.createCard(getPlaceFromAddPlacePopup())
       .then((card) => {
-        renderToStart(cards, createCard(card));
+        if (card.status !== 200) new Error(JSON.stringify(card));
+        renderToStart(cardsContainer, createCard(card));
         closePopup(addPlacePopup);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
         submitLoaded();
       })
 
@@ -100,7 +115,16 @@ const setupAddPlacePopup = () => {
 }
 
 const setupProfile = async () => {
-  setProfile(await Api.me());
+  try {
+    const profile = await Api.me();
+    if (profile.status !== 200) new Error(JSON.stringify(profile))
+    Api.myId = profile._id;
+    setProfile(profile);
+  } catch (error) {
+    console.log(error)
+  }
+
+  setProfile(profile);
   profileEditButton.addEventListener("click", () => {
     setProfileToEditProfileForm(getProfile());
     openPopup(editProfilePopup);
@@ -118,20 +142,23 @@ const setupTopBar = () => {
   })
 }
 
-const setupCards = async () => {
-  renderToStart(cards, ...(await Api.getCards()).map(card => createCard(card)));
+const setupCards = () => {
+  Api.getCards()
+    .then((cards) => {
+      renderToStart(cardsContainer, ...cards.map(card => createCard(card)));
+    })
+    .catch((error) => {
+      console.log(error)
+    })
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
-  // Необходимо синхронное выполнение, т.к. другие методы обращаются к полям Api
-  await Api.authorize();
-
   enableValidation();
 
   setupPopups();
 
   setupTopBar();
-  setupProfile();
+  await setupProfile();
   setupAddPlacePopup();
   setupEditProfilePopup();
   setupEditProfileAvatarPopup();

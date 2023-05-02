@@ -34,7 +34,7 @@ export const createCard = (card) => {
     cardImage.alt = card.name;
     cardName.textContent = card.name;
     cardLikeCounter.textContent = card.likes.length;
-    if (card.likes.map(like => like._id).includes(Api.myId)) likeCard(cardLikeButton);
+    card.likes.map(like => like._id).includes(Api.myId) ? likeCard(cardLikeButton) : dislikeCard(cardLikeButton);
     if (card.owner._id === Api.myId) showDeleteButton(cardDeleteButton);
   }
   updateCard(card);
@@ -42,16 +42,28 @@ export const createCard = (card) => {
   // События
   cardLikeButton.addEventListener("click", () => {
     if (cardLikeButton.classList.contains("card__like_liked")) {
-      Api.dislikeCard(card._id).then(updateCard); // промис, т.к. анимация постановки/снятия лайка важнее чем точная цифра
-      dislikeCard(cardLikeButton);
+      Api.dislikeCard(card._id).then((card) => {
+        if (card.status !== 200) new Error(JSON.stringify(card))
+        updateCard(card);
+      }).catch((error) => {
+        console.log(error);
+      });
     } else {
-      Api.likeCard(card._id).then(updateCard); // аналогично
-      likeCard(cardLikeButton);
+      Api.likeCard(card._id).then((card) => {
+        if (card.status !== 200) new Error(JSON.stringify(card))
+        updateCard(card);
+      }).catch((error) => {
+        console.log(error);
+      });
     }
   })
   cardDeleteButton.addEventListener("click", async () => {
-    await Api.deleteCard(card._id);
-    cardElement.remove();
+    Api.deleteCard(card._id).then(() => {
+      if (card.status !== 200) new Error(JSON.stringify(card))
+      cardElement.remove();
+    }).catch((error) => {
+      console.log(error);
+    });
   })
   cardImage.addEventListener("click", () => {
     setPlaceToPlacePopup({

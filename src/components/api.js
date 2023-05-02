@@ -1,29 +1,27 @@
 class Api {
-  static token = process.env.TOKEN
-  static cohort = process.env.GROUP_ID
+  static token = "00fccd87-cb24-497a-b6d0-96321a72a3ba"
+  static cohort = "exp-mipt-fbc-1"
   static myId;
 
   static authorizedFetch = async ({method, path, body}) => {
-    try {
-      const response = await fetch(`https://nomoreparties.co/v1/${this.cohort}${path}`, {
+    return new Promise((resolve, reject) => {
+      fetch(`https://nomoreparties.co/v1/${this.cohort}${path}`, {
         method: method,
         headers: {
           authorization: this.token,
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(body),
-      });
-      if (!response.ok) {
-        throw new Error(`Ошибка, статус: ${response.status}`);
-      }
-      return await response.json()
-    } catch (e) {
-      console.log(e.message);
-    }
-  }
-
-  static async authorize() {
-    Api.myId = (await this.me())._id;
+      })
+        .then(async (res) => {
+          const json = await res.json();
+          json.status = res.status;
+          resolve(json);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    })
   }
 
   static async me() {
