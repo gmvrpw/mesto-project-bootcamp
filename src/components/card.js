@@ -1,6 +1,7 @@
 import { openPopup } from "./modal";
 import { setPlaceToPlacePopup } from "./modal/place";
 import Api from "./api";
+import {re} from "@babel/core/lib/vendor/import-meta-resolve";
 
 const placePopup = document.querySelector("#place-popup");
 const cardTemplate = document.querySelector("#card-template");
@@ -42,16 +43,28 @@ export const createCard = (card) => {
   // События
   cardLikeButton.addEventListener("click", () => {
     if (cardLikeButton.classList.contains("card__like_liked")) {
-      Api.dislikeCard(card._id).then(updateCard); // промис, т.к. анимация постановки/снятия лайка важнее чем точная цифра
-      dislikeCard(cardLikeButton);
+      Api.dislikeCard(card._id).then((card) => {
+        if (card.status !== 200) new Error(JSON.stringify(card))
+        updateCard(card);
+      }).catch((error) => {
+        console.log(error);
+      });
     } else {
-      Api.likeCard(card._id).then(updateCard); // аналогично
-      likeCard(cardLikeButton);
+      Api.likeCard(card._id).then((card) => {
+        if (card.status !== 200) new Error(JSON.stringify(card))
+        updateCard(card);
+      }).catch((error) => {
+        console.log(error);
+      });
     }
   })
   cardDeleteButton.addEventListener("click", async () => {
-    await Api.deleteCard(card._id);
-    cardElement.remove();
+    Api.deleteCard(card._id).then(() => {
+      if (card.status !== 200) new Error(JSON.stringify(card))
+      cardElement.remove();
+    }).catch((error) => {
+      console.log(error);
+    });
   })
   cardImage.addEventListener("click", () => {
     setPlaceToPlacePopup({

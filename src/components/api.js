@@ -4,22 +4,18 @@ class Api {
   static myId;
 
   static authorizedFetch = async ({method, path, body}) => {
-    try {
-      const response = await fetch(`https://nomoreparties.co/v1/${this.cohort}${path}`, {
-        method: method,
-        headers: {
-          authorization: this.token,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(body),
+    return fetch(`https://nomoreparties.co/v1/${this.cohort}${path}`, {
+      method: method,
+      headers: {
+        authorization: this.token,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body),
+    })
+      .then((res) => {
+        const json = res.json();
+        json.status = res.status;
       });
-      if (!response.ok) {
-        throw new Error(`Ошибка, статус: ${response.status}`);
-      }
-      return await response.json()
-    } catch (e) {
-      console.log(e.message);
-    }
   }
 
   static async me() {
