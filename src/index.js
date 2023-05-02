@@ -46,7 +46,7 @@ const profile = document.querySelector(".profile");
 const profileEditButton = profile.querySelector(".profile__edit");
 const profileEditAvatarButton = profile.querySelector(".profile__avatar-edit");
 
-const cards = document.querySelector(".cards");
+const cardsContainer = document.querySelector(".cards");
 
 const setupEditProfilePopup = () => {
   const editProfilePopupFormSubmitButton = editProfilePopupForm.querySelector(".form__submit");
@@ -100,7 +100,7 @@ const setupAddPlacePopup = () => {
     Api.createCard(getPlaceFromAddPlacePopup())
       .then((card) => {
         if (card.status !== 200) new Error(JSON.stringify(card));
-        renderToStart(cards, createCard(card));
+        renderToStart(cardsContainer, createCard(card));
         closePopup(addPlacePopup);
       })
       .catch((error) => {
@@ -119,9 +119,9 @@ const setupProfile = async () => {
     const profile = await Api.me();
     if (profile.status !== 200) new Error(JSON.stringify(profile))
     Api.myId = profile._id;
+    setProfile(profile);
   } catch (error) {
     console.log(error)
-
   }
 
   setProfile(profile);
@@ -145,7 +145,7 @@ const setupTopBar = () => {
 const setupCards = () => {
   Api.getCards()
     .then((cards) => {
-      renderToStart(cards, cards.map(card => createCard(card)));
+      renderToStart(cardsContainer, ...cards.map(card => createCard(card)));
     })
     .catch((error) => {
       console.log(error)

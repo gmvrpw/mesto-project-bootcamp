@@ -1,7 +1,6 @@
 import { openPopup } from "./modal";
 import { setPlaceToPlacePopup } from "./modal/place";
 import Api from "./api";
-import {re} from "@babel/core/lib/vendor/import-meta-resolve";
 
 const placePopup = document.querySelector("#place-popup");
 const cardTemplate = document.querySelector("#card-template");
@@ -35,7 +34,7 @@ export const createCard = (card) => {
     cardImage.alt = card.name;
     cardName.textContent = card.name;
     cardLikeCounter.textContent = card.likes.length;
-    if (card.likes.map(like => like._id).includes(Api.myId)) likeCard(cardLikeButton);
+    card.likes.map(like => like._id).includes(Api.myId) ? likeCard(cardLikeButton) : dislikeCard(cardLikeButton);
     if (card.owner._id === Api.myId) showDeleteButton(cardDeleteButton);
   }
   updateCard(card);
