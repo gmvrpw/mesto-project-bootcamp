@@ -22,10 +22,6 @@ class Api {
     }
   }
 
-  static async authorize() {
-    Api.myId = (await this.me())._id;
-  }
-
   static async me() {
     return await this.authorizedFetch({
       path: "/users/me",

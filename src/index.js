@@ -100,7 +100,9 @@ const setupAddPlacePopup = () => {
 }
 
 const setupProfile = async () => {
-  setProfile(await Api.me());
+  const profile = await Api.me();
+  Api.myId = profile._id;
+  setProfile(profile);
   profileEditButton.addEventListener("click", () => {
     setProfileToEditProfileForm(getProfile());
     openPopup(editProfilePopup);
@@ -123,15 +125,12 @@ const setupCards = async () => {
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
-  // Необходимо синхронное выполнение, т.к. другие методы обращаются к полям Api
-  await Api.authorize();
-
   enableValidation();
 
   setupPopups();
 
   setupTopBar();
-  setupProfile();
+  await setupProfile();
   setupAddPlacePopup();
   setupEditProfilePopup();
   setupEditProfileAvatarPopup();
