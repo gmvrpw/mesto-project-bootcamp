@@ -79,6 +79,7 @@ const setupEditProfileAvatarPopup = () => {
         if (profile.status !== 200) new Error(JSON.stringify(profile))
         setProfile(profile);
         closePopup(editProfileAvatarPopup);
+        editProfileAvatarPopupForm.reset();
       })
       .catch((error) => {
         console.log(error);
@@ -102,6 +103,7 @@ const setupAddPlacePopup = () => {
         if (card.status !== 200) new Error(JSON.stringify(card));
         renderToStart(cardsContainer, createCard(card));
         closePopup(addPlacePopup);
+        addPlacePopupForm.reset();
       })
       .catch((error) => {
         console.log(error);
